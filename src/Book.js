@@ -16,6 +16,7 @@ class Book extends Component {
   };
 
   render() {
+    const { img, id, title, author } = this.props;
     return (
       <li className="book">
         <div className="book">
@@ -25,12 +26,12 @@ class Book extends Component {
               style={{
                 width: 128,
                 height: 188,
-                backgroundImage: `url(${this.props.img})`
+                backgroundImage: `url(${img})`
               }}
             />
             <div className="book-shelf-changer">
               <select
-                id={this.props.id}
+                id={id}
                 value={this.state.shelf}
                 onChange={this.handleChangeShelf}
                 // onChange={event => this.changeShelf(event.target.value)}
@@ -45,8 +46,8 @@ class Book extends Component {
               </select>
             </div>
           </div>
-          <div className="book-title">{this.props.title}</div>
-          <div className="book-authors">{this.props.author}</div>
+          <div className="book-title">{title}</div>
+          <div className="book-authors">{author}</div>
         </div>
       </li>
     );

@@ -21,7 +21,6 @@ class SearchBooks extends Component {
   searchBooks = query => {
     BooksAPI.search(query).then(data => {
       if (data && data.length > 0) {
-        console.log(data);
         this.setState({
           showingBooks: data
         });
@@ -35,10 +34,9 @@ class SearchBooks extends Component {
 
   render() {
     const { updateShelves } = this.props;
-    const { query } = this.state;
+    const { query, showingBooks } = this.state;
 
     // let showingBooks;
-
     // if (query) {
     //   const match = new RegExp(escapeRegExp(query), "i");
     //   showingBooks = books.filter(book => match.test(book.title));
@@ -70,9 +68,12 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
+          {showingBooks.length > 0 && (
+            <div>Showing {showingBooks.length} books</div>
+          )}
           <ol className="books-grid">
-            {this.state.showingBooks &&
-              this.state.showingBooks.map(book => (
+            {showingBooks &&
+              showingBooks.map(book => (
                 <Book
                   key={book.id}
                   onUpdateShelves={(book, shelf) => updateShelves(book, shelf)}
