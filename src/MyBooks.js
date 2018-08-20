@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Book from "./Book.js";
-import * as BooksAPI from "./BooksAPI";
 
 class MyBooks extends Component {
-  onUpdateShelves = (book, shelf) => {
-    BooksAPI.update(book, shelf);
-  };
-
   render() {
     const { books, updateShelves } = this.props;
     return (
@@ -33,7 +28,11 @@ class MyBooks extends Component {
                           }
                           id={book.id}
                           shelf={book.shelf}
-                          img={book.imageLinks.smallThumbnail}
+                          img={
+                            book.imageLinks
+                              ? book.imageLinks.smallThumbnail
+                              : ""
+                          }
                           title={book.title}
                           author={book.authors}
                         />
@@ -58,7 +57,11 @@ class MyBooks extends Component {
                           }
                           id={book.id}
                           shelf={book.shelf}
-                          img={book.imageLinks.smallThumbnail}
+                          img={
+                            book.imageLinks
+                              ? book.imageLinks.smallThumbnail
+                              : ""
+                          }
                           title={book.title}
                           author={book.authors}
                         />
@@ -81,7 +84,9 @@ class MyBooks extends Component {
                         }
                         id={book.id}
                         shelf={book.shelf}
-                        img={book.imageLinks.smallThumbnail}
+                        img={
+                          book.imageLinks ? book.imageLinks.smallThumbnail : ""
+                        }
                         title={book.title}
                         author={book.authors}
                       />

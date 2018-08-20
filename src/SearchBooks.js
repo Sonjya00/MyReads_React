@@ -2,32 +2,49 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import escapeRegExp from "escape-string-regexp";
 import sortBy from "sort-by";
-
+import * as BooksAPI from "./BooksAPI";
 import Book from "./Book.js";
 
 class SearchBooks extends Component {
   state = {
-    query: ""
+    query: "",
+    showingBooks: []
   };
 
   updateQuery = query => {
     this.setState({
-      query: query.trim()
+      query: query
+    });
+    this.searchBooks(query);
+  };
+
+  searchBooks = query => {
+    BooksAPI.search(query).then(data => {
+      if (data && data.length > 0) {
+        console.log(data);
+        this.setState({
+          showingBooks: data
+        });
+      } else {
+        this.setState({
+          showingBooks: []
+        });
+      }
     });
   };
 
   render() {
-    const { books, updateShelves } = this.props;
+    const { updateShelves } = this.props;
     const { query } = this.state;
 
-    let showingBooks;
+    // let showingBooks;
 
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), "i");
-      showingBooks = books.filter(book => match.test(book.title));
-    } else {
-      showingBooks = books;
-    }
+    // if (query) {
+    //   const match = new RegExp(escapeRegExp(query), "i");
+    //   showingBooks = books.filter(book => match.test(book.title));
+    // } else {
+    //   showingBooks = books;
+    // }
 
     return (
       <div className="search-books">
@@ -54,17 +71,18 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {showingBooks.map(book => (
-              <Book
-                key={book.id}
-                onUpdateShelves={(book, shelf) => updateShelves(book, shelf)}
-                id={book.id}
-                shelf={book.shelf}
-                img={book.imageLinks.smallThumbnail}
-                title={book.title}
-                author={book.authors}
-              />
-            ))}
+            {this.state.showingBooks &&
+              this.state.showingBooks.map(book => (
+                <Book
+                  key={book.id}
+                  onUpdateShelves={(book, shelf) => updateShelves(book, shelf)}
+                  id={book.id}
+                  shelf={book.shelf}
+                  img={book.imageLinks ? book.imageLinks.smallThumbnail : ""}
+                  title={book.title}
+                  author={book.authors}
+                />
+              ))}
           </ol>
         </div>
       </div>

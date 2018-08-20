@@ -12,11 +12,7 @@ class Book extends Component {
   }
 
   handleChangeShelf = event => {
-    const newShelf = event.target.value;
-    this.setState({
-      shelf: newShelf
-    });
-    this.props.onUpdateShelves(this.props, newShelf);
+    this.props.onUpdateShelves(this.props, event.target.value);
   };
 
   render() {
