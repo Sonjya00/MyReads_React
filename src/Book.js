@@ -1,13 +1,27 @@
 import React, { Component } from "react";
 
 class Book extends Component {
+  state = {
+    shelf: "none"
+  };
+
   componentDidMount() {
-    document.getElementById(this.props.id).value = this.props.shelf;
+    this.setState({
+      shelf: this.props.shelf
+    });
   }
+
+  handleChangeShelf = event => {
+    const newShelf = event.target.value;
+    this.setState({
+      shelf: newShelf
+    });
+    this.props.onUpdateShelves(this.props, newShelf);
+  };
 
   render() {
     return (
-      <li key={this.props.id} className="book">
+      <li className="book">
         <div className="book">
           <div className="book-top">
             <div
@@ -19,7 +33,12 @@ class Book extends Component {
               }}
             />
             <div className="book-shelf-changer">
-              <select id={this.props.id}>
+              <select
+                id={this.props.id}
+                value={this.state.shelf}
+                onChange={this.handleChangeShelf}
+                // onChange={event => this.changeShelf(event.target.value)}
+              >
                 <option value="move" disabled>
                   Move to...
                 </option>

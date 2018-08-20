@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Book from "./Book.js";
+import * as BooksAPI from "./BooksAPI";
 
 class MyBooks extends Component {
-  state = {};
+  onUpdateShelves = (book, shelf) => {
+    BooksAPI.update(book, shelf);
+  };
+
   render() {
+    const { books, updateShelves } = this.props;
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -17,11 +22,15 @@ class MyBooks extends Component {
               <h2 className="bookshelf-title">Currently Reading</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {this.props.books
+                  {books
                     .filter(book => book.shelf === "currentlyReading")
                     .map(book => {
                       return (
                         <Book
+                          key={book.id}
+                          onUpdateShelves={(book, shelf) =>
+                            updateShelves(book, shelf)
+                          }
                           id={book.id}
                           shelf={book.shelf}
                           img={book.imageLinks.smallThumbnail}
@@ -38,16 +47,20 @@ class MyBooks extends Component {
               <h2 className="bookshelf-title">Want to Read</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {this.props.books
+                  {books
                     .filter(book => book.shelf === "wantToRead")
                     .map(book => {
                       return (
                         <Book
+                          key={book.id}
+                          onUpdateShelves={(book, shelf) =>
+                            updateShelves(book, shelf)
+                          }
                           id={book.id}
                           shelf={book.shelf}
                           img={book.imageLinks.smallThumbnail}
                           title={book.title}
-                          author={book.author}
+                          author={book.authors}
                         />
                       );
                     })}
@@ -59,19 +72,21 @@ class MyBooks extends Component {
               <h2 className="bookshelf-title">Read</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {this.props.books
-                    .filter(book => book.shelf === "read")
-                    .map(book => {
-                      return (
-                        <Book
-                          id={book.id}
-                          shelf={book.shelf}
-                          img={book.imageLinks.smallThumbnail}
-                          title={book.title}
-                          author={book.author}
-                        />
-                      );
-                    })}
+                  {books.filter(book => book.shelf === "read").map(book => {
+                    return (
+                      <Book
+                        key={book.id}
+                        onUpdateShelves={(book, shelf) =>
+                          updateShelves(book, shelf)
+                        }
+                        id={book.id}
+                        shelf={book.shelf}
+                        img={book.imageLinks.smallThumbnail}
+                        title={book.title}
+                        author={book.authors}
+                      />
+                    );
+                  })}
                 </ol>
               </div>
             </div>

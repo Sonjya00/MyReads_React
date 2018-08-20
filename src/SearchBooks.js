@@ -17,7 +17,7 @@ class SearchBooks extends Component {
   };
 
   render() {
-    const { books } = this.props;
+    const { books, updateShelves } = this.props;
     const { query } = this.state;
 
     let showingBooks;
@@ -28,7 +28,6 @@ class SearchBooks extends Component {
     } else {
       showingBooks = books;
     }
-    console.log(showingBooks);
 
     return (
       <div className="search-books">
@@ -57,6 +56,8 @@ class SearchBooks extends Component {
           <ol className="books-grid">
             {showingBooks.map(book => (
               <Book
+                key={book.id}
+                onUpdateShelves={(book, shelf) => updateShelves(book, shelf)}
                 id={book.id}
                 shelf={book.shelf}
                 img={book.imageLinks.smallThumbnail}
