@@ -32,6 +32,11 @@ class SearchBooks extends Component {
     });
   };
 
+  sendBookId = id => {
+    this.props.getBookId(id);
+    console.log(id);
+  };
+
   render() {
     const { updateShelves } = this.props;
     const { query, showingBooks } = this.state;
@@ -77,6 +82,7 @@ class SearchBooks extends Component {
                 <Book
                   key={book.id}
                   onUpdateShelves={(book, shelf) => updateShelves(book, shelf)}
+                  sendBookId={this.sendBookId}
                   id={book.id}
                   shelf={book.shelf}
                   img={book.imageLinks ? book.imageLinks.smallThumbnail : ""}

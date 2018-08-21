@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Book from "./Book.js";
 
 class MyBooks extends Component {
+  sendBookId = id => {
+    this.props.getBookId(id);
+  };
   render() {
     const { books, updateShelves } = this.props;
     return (
@@ -26,6 +29,7 @@ class MyBooks extends Component {
                           onUpdateShelves={(book, shelf) =>
                             updateShelves(book, shelf)
                           }
+                          sendBookId={this.sendBookId}
                           id={book.id}
                           shelf={book.shelf}
                           img={
@@ -55,6 +59,7 @@ class MyBooks extends Component {
                           onUpdateShelves={(book, shelf) =>
                             updateShelves(book, shelf)
                           }
+                          sendBookId={this.sendBookId}
                           id={book.id}
                           shelf={book.shelf}
                           img={
@@ -82,6 +87,7 @@ class MyBooks extends Component {
                         onUpdateShelves={(book, shelf) =>
                           updateShelves(book, shelf)
                         }
+                        sendBookId={this.sendBookId}
                         id={book.id}
                         shelf={book.shelf}
                         img={

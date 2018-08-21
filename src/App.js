@@ -3,13 +3,15 @@ import { Route } from "react-router-dom";
 
 import MyBooks from "./MyBooks";
 import SearchBooks from "./SearchBooks.js";
+import BookDetails from "./BookDetails.js";
 
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
 
 class BooksApp extends Component {
   state = {
-    books: []
+    books: [],
+    bookId: ""
   };
 
   componentDidMount() {
@@ -30,7 +32,26 @@ class BooksApp extends Component {
       );
   };
 
+  updateShelves__BD = (book, shelf, id) => {
+    BooksAPI.update(book, shelf)
+      .then(() => BooksAPI.get(id))
+      .then(data =>
+        this.setState({
+          book: data,
+          bookId: id
+        })
+      )
+      .then(() => this.updateShelves(book, shelf));
+  };
+
+  getBookId = id => {
+    this.setState({ bookId: id });
+  };
+
   render() {
+    let bookId = this.state.bookId;
+    let bookDetailPath = `/details/${this.state.bookId}`;
+
     return (
       <div className="app">
         <Route
@@ -40,9 +61,9 @@ class BooksApp extends Component {
             <MyBooks
               books={this.state.books}
               updateShelves={this.updateShelves}
+              getBookId={this.getBookId}
             />
           )}
-        />
         />
         <Route
           path="/search"
@@ -50,6 +71,19 @@ class BooksApp extends Component {
             <SearchBooks
               books={this.state.books}
               updateShelves={this.updateShelves}
+              getBookId={this.getBookId}
+            />
+          )}
+        />
+        <Route
+          path={bookDetailPath}
+          render={() => (
+            <BookDetails
+              books={this.state.books}
+              onUpdateShelves__BD={(book, shelf, id) =>
+                this.updateShelves__BD(book, shelf, id)
+              }
+              bookId={bookId}
             />
           )}
         />
