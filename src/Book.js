@@ -24,7 +24,7 @@ class Book extends Component {
   // upon refresh).
   handleClick = id => {
     id = this.props.id;
-    this.props.sendBookId(id);
+    this.props.onsendBookId(id);
     localStorage.setItem("bookId", JSON.stringify(id));
   };
 

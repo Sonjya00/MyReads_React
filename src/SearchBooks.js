@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import escapeRegExp from "escape-string-regexp";
-import sortBy from "sort-by";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book.js";
 
@@ -33,8 +31,10 @@ class SearchBooks extends Component {
 
   // Send the keyword selected to the updateQuery method
   selectKeyword = e => {
-    const newQuery = e.target.textContent;
-    this.updateQuery(newQuery);
+    if (e.target.nodeName === "BUTTON") {
+      const newQuery = e.target.textContent;
+      this.updateQuery(newQuery);
+    }
   };
 
   // Use the query to search for matching books.
@@ -56,24 +56,9 @@ class SearchBooks extends Component {
     });
   };
 
-  // When BookDetails is open from Book,
-  // Book sends the id of the book selected to the parent component,
-  // which then sends it to App (needed to get the path to BookDetails)
-  sendBookId = id => {
-    this.props.getBookId(id);
-  };
-
   render() {
     const { updateShelves } = this.props;
     const { query, showingBooks } = this.state;
-
-    // let showingBooks;
-    // if (query) {
-    //   const match = new RegExp(escapeRegExp(query), "i");
-    //   showingBooks = books.filter(book => match.test(book.title));
-    // } else {
-    //   showingBooks = books;
-    // }
 
     return (
       <div className="search-books">
@@ -115,7 +100,12 @@ class SearchBooks extends Component {
                 <Book
                   key={book.id}
                   onUpdateShelves={(book, shelf) => updateShelves(book, shelf)}
-                  sendBookId={this.sendBookId}
+                  // When BookDetails is open from Book,
+                  // Book sends the id of the book selected to the parent component,
+                  // which then sends it to App (needed to get the path to BookDetails)
+                  onsendBookId={id => {
+                    this.props.getBookId(id);
+                  }}
                   id={book.id}
                   shelf={book.shelf}
                   img={book.imageLinks ? book.imageLinks.smallThumbnail : ""}
@@ -126,10 +116,10 @@ class SearchBooks extends Component {
             ) : this.state.query === "" ? (
               // If there are no matching results, check if the query is empty.
               // If it is, show initial screen with suggested keywords
-              <div className="keywords-screen">
+              <div className="keywords-screen" onClick={this.selectKeyword}>
                 <h2>Suggested Keywords</h2>
                 <h3>Authors</h3>
-                <div onClick={this.selectKeyword}>
+                <div>
                   “<button className="keyword-btn">Austen</button>
                   ”, “<button className="keyword-btn">Bhagat</button>
                   ”, “<button className="keyword-btn">Camus</button>
@@ -148,12 +138,12 @@ class SearchBooks extends Component {
                   ”, “<button className="keyword-btn">Marquez</button>
                   ”, “<button className="keyword-btn">Rowling</button>
                   ”, “<button className="keyword-btn">Singh</button>
-                  ”, “<button className="keyword-btn">Shakespear</button>
+                  ”, “<button className="keyword-btn">Shakespeare</button>
                   ”, “<button className="keyword-btn">Tolstoy</button>
                   ”, “<button className="keyword-btn">Thrun</button>”
                 </div>
                 <h3>Genre</h3>
-                <div onClick={this.selectKeyword}>
+                <div>
                   “<button className="keyword-btn">Biography</button>
                   ”, “<button className="keyword-btn">Classics</button>
                   ”, “<button className="keyword-btn">Comics</button>
@@ -170,7 +160,7 @@ class SearchBooks extends Component {
                   ”, “<button className="keyword-btn">Tale</button>”
                 </div>
                 <h3>Technology</h3>
-                <div onClick={this.selectKeyword}>
+                <div>
                   “<button className="keyword-btn">Android</button>
                   ”, “
                   <button className="keyword-btn">
@@ -187,7 +177,7 @@ class SearchBooks extends Component {
                   ”, “<button className="keyword-btn">iOS</button>”
                 </div>
                 <h3>Economy</h3>
-                <div onClick={this.selectKeyword}>
+                <div>
                   “<button className="keyword-btn">Business</button>
                   ”, “<button className="keyword-btn">Digital Marketing</button>
                   ”, “<button className="keyword-btn">Finance</button>
@@ -197,7 +187,7 @@ class SearchBooks extends Component {
                   ”, “<button className="keyword-btn">Production</button>”
                 </div>
                 <h3>Sport</h3>
-                <div onClick={this.selectKeyword}>
+                <div>
                   “<button className="keyword-btn">Baseball</button>
                   ”, “<button className="keyword-btn">Basketball</button>
                   ”, “<button className="keyword-btn">Cricket</button>
@@ -207,7 +197,7 @@ class SearchBooks extends Component {
                   ”, “<button className="keyword-btn">Swimming</button>”
                 </div>
                 <h3>Skills, Art & Hobbies</h3>
-                <div onClick={this.selectKeyword}>
+                <div>
                   “<button className="keyword-btn">Art</button>
                   ”,
                   <button className="keyword-btn">Astronomy</button>
@@ -221,7 +211,7 @@ class SearchBooks extends Component {
                   ”, “<button className="keyword-btn">Photography</button>”
                 </div>
                 <h3>Miscellaneous</h3>
-                <div onClick={this.selectKeyword}>
+                <div>
                   “<button className="keyword-btn">Brief</button>
                   ”, “<button className="keyword-btn">Everything</button>
                   ”, “<button className="keyword-btn">First</button>

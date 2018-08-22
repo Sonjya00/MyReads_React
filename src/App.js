@@ -11,16 +11,27 @@ import "./App.css";
 class BooksApp extends Component {
   state = {
     books: [],
+    currentlyReading: [],
+    wantToRead: [],
+    read: [],
     bookId: ""
   };
 
-  // Get all books placed in a shelf
+  // Get initial state (book array and 3 shelves arrays)
   componentDidMount() {
-    BooksAPI.getAll().then(books =>
-      this.setState({
-        books: books
-      })
-    );
+    BooksAPI.getAll().then(books => {
+      this.updateShelfState(books);
+    });
+  }
+
+  // Update books and shelves arrays when a books shelf changes
+  updateShelfState(books) {
+    this.setState({
+      books: books,
+      currentlyReading: books.filter(book => book.shelf === "currentlyReading"),
+      wantToRead: books.filter(book => book.shelf === "wantToRead"),
+      read: books.filter(book => book.shelf === "read")
+    });
   }
 
   // When a book changes shelf from either MyBooks or SearchBook,
@@ -29,11 +40,7 @@ class BooksApp extends Component {
   updateShelves = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then(() => BooksAPI.getAll())
-      .then(books =>
-        this.setState({
-          books: books
-        })
-      );
+      .then(books => this.updateShelfState(books));
   };
 
   // When a book changes shelf from BookDetails,
@@ -70,6 +77,9 @@ class BooksApp extends Component {
           render={() => (
             <MyBooks
               books={this.state.books}
+              currentlyReading={this.state.currentlyReading}
+              wantToRead={this.state.wantToRead}
+              read={this.state.read}
               updateShelves={this.updateShelves}
               getBookId={this.getBookId}
             />

@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Book from "./Book.js";
-import BookDetails from "./BookDetails.js";
 
 class MyBooks extends Component {
-  // When BookDetails is open from Book,
-  // Book sends the id of the book selected to the parent component,
-  // which then sends it to App (needed to get the path to BookDetails)
-  sendBookId = id => {
-    this.props.getBookId(id);
-  };
+  // state = {
+  //   books: this.props.books
+  // };
+
   render() {
     const { books, updateShelves } = this.props;
     return (
@@ -21,7 +18,9 @@ class MyBooks extends Component {
           <div>
             {/* CURRENTLY READING BOOKS */}
             <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
+              <h2 className="bookshelf-title">
+                Currently Reading ({this.props.currentlyReading.length})
+              </h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {books
@@ -33,7 +32,12 @@ class MyBooks extends Component {
                           onUpdateShelves={(book, shelf) =>
                             updateShelves(book, shelf)
                           }
-                          sendBookId={this.sendBookId}
+                          // When BookDetails is open from Book,
+                          // Book sends the id of the book selected to the parent component,
+                          // which then sends it to App (needed to get the path to BookDetails)
+                          onsendBookId={id => {
+                            this.props.getBookId(id);
+                          }}
                           id={book.id}
                           shelf={book.shelf}
                           img={
@@ -51,7 +55,9 @@ class MyBooks extends Component {
             </div>
             {/* WANT TO READ BOOKS */}
             <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
+              <h2 className="bookshelf-title">
+                Want to Read ({this.props.wantToRead.length})
+              </h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {books
@@ -63,7 +69,9 @@ class MyBooks extends Component {
                           onUpdateShelves={(book, shelf) =>
                             updateShelves(book, shelf)
                           }
-                          sendBookId={this.sendBookId}
+                          sendBookId={id => {
+                            this.props.getBookId(id);
+                          }}
                           id={book.id}
                           shelf={book.shelf}
                           img={
@@ -81,7 +89,9 @@ class MyBooks extends Component {
             </div>
             {/* READ BOOKS */}
             <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
+              <h2 className="bookshelf-title">
+                Read ({this.props.read.length})
+              </h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {books.filter(book => book.shelf === "read").map(book => {
