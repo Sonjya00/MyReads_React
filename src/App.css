@@ -18,6 +18,7 @@ body,
   padding: 10px 0;
   background: linear-gradient(to left, #06a9d6, #0678d6);
   text-align: center;
+  letter-spacing: 5px;
 }
 .list-books-title h1 {
   font-weight: 400;
@@ -112,6 +113,45 @@ body,
   padding: 80px 10px 20px;
 }
 
+/* search page -- custom style */
+
+.keywords-screen {
+  width: 80%;
+  text-align: center;
+}
+
+.keywords-screen h3 {
+  color: #d606a9;
+}
+
+.keywords-screen span {
+  color: #06a9d6;
+}
+
+.query-result {
+  text-align: center;
+  font-size: 16px;
+}
+
+.query-result p,
+.reset-query-btn {
+  display: inline-block;
+}
+
+.reset-query-btn,
+.keyword-btn {
+  font-size: 16px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  color: #06a9d6;
+  cursor: pointer;
+}
+
+.reset-query-btn:hover,
+.keyword-btn:hover {
+  color: #0678d6;
+}
+
 /* books grid */
 
 .books-grid {
@@ -174,7 +214,7 @@ body,
   background-color: #0678d6;
 }
 
-/* book cover */
+/* single book page */
 
 .close-search--details {
   display: block;
@@ -198,8 +238,10 @@ body,
 }
 
 .book-details__title {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   text-align: center;
+  border-bottom: 1px solid #dedede;
 }
 
 .book-details__author {
@@ -207,16 +249,21 @@ body,
 }
 
 .book-details__top {
-  margin: 30px 30px 0px auto;
-  height: 290px;
+  margin: 20px auto;
+  height: 300px;
+  width: 80%;
+  border-bottom: 1px solid #dedede;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .book-details__top--left {
-  width: 100%;
+  width: 50%;
 }
 
 .book-details--book-cover {
   position: relative;
+  margin: 0 30px 0 auto;
   width: 192px;
   height: 282px;
   display: flex;
@@ -235,9 +282,14 @@ body,
 
 .book-details--info {
   margin-top: 70px;
+  margin-left: 30px;
   line-height: 30px;
   list-style-type: none;
   padding-left: 0;
+}
+
+.book-details--weblink {
+  margin-left: 30px;
 }
 
 .book-cover {
@@ -260,6 +312,20 @@ body,
 }
 
 .book-details--strong {
+  color: #d606a9;
+  font-weight: bold;
+}
+
+.link {
   color: #0678d6;
   font-weight: bold;
+  text-decoration: none;
+}
+
+.close-book-details {
+  position: relative;
+  fill: gray;
+  display: block;
+  top: 10px;
+  left: 95%;
 }

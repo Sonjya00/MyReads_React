@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Book from "./Book.js";
+import BookDetails from "./BookDetails.js";
 
 class MyBooks extends Component {
   sendBookId = id => {

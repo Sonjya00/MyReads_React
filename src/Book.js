@@ -16,7 +16,7 @@ class Book extends Component {
     this.props.onUpdateShelves(this.props, event.target.value);
   };
 
-  getBookId = id => {
+  handleClick = id => {
     id = this.props.id;
     this.props.sendBookId(id);
     localStorage.setItem("bookId", JSON.stringify(id));
@@ -53,7 +53,7 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">
-          <Link to={path} onClick={this.getBookId}>
+          <Link to={path} onClick={this.handleClick} class="link">
             {title}
           </Link>
         </div>
