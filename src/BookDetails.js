@@ -10,6 +10,7 @@ class BookDetails extends Component {
     loading: true
   };
 
+  // Get the book info via its id stored inside of localstorage
   componentDidMount() {
     const bookId = JSON.parse(localStorage.getItem("bookId"));
     BooksAPI.get(bookId).then(data => {
@@ -22,8 +23,12 @@ class BookDetails extends Component {
     });
   }
 
+  // When the shelf is changed with the select, the shelf on the state updates
+  // And the new data is sent to App
   handleChangeShelf__BD = event => {
-    this.state.shelf = event.target.value;
+    this.setState({
+      shelf: event.target.value
+    });
     this.props.onUpdateShelves__BD(
       this.state.book,
       event.target.value,
@@ -51,9 +56,9 @@ class BookDetails extends Component {
           <h1>MyReads</h1>
         </div>
         {/* https://www.materialui.co/icon/clear */}
-        <Link to="/">
+        <Link to="/" className="close-bookdetails">
           <svg
-            class="close-book-details"
+            className="close-book-details"
             xmlns="http://www.w3.org/2000/svg"
             width="40"
             height="40"
@@ -64,8 +69,12 @@ class BookDetails extends Component {
         </Link>
 
         {this.state.loading === true ? (
-          <div className="query-result">
-            <p>Loading Book Info... </p>
+          <div className="book-details__book">
+            <div className="book-details__title">
+              <div className="query-result">
+                <p>Loading Book Info... </p>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="book-details__book">

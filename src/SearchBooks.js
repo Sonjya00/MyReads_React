@@ -12,6 +12,9 @@ class SearchBooks extends Component {
     loading: false
   };
 
+  // Called when some query is typed or selected by clicking a keyword.
+  // It calls searchBook and sends the query to it
+  // Status is set to loading to get a loading message
   updateQuery = query => {
     this.setState({
       query: query,
@@ -20,6 +23,7 @@ class SearchBooks extends Component {
     this.searchBooks(query);
   };
 
+  // Clean the query and reset showing book array
   clearQuery = () => {
     this.setState({
       query: "",
@@ -27,11 +31,15 @@ class SearchBooks extends Component {
     });
   };
 
+  // Send the keyword selected to the updateQuery method
   selectKeyword = e => {
     const newQuery = e.target.textContent;
     this.updateQuery(newQuery);
   };
 
+  // Use the query to search for matching books.
+  // Update the showing books (with either the results or the no results message)
+  // Loading status is turned off
   searchBooks = query => {
     BooksAPI.search(query).then(data => {
       if (data && data.length > 0) {
@@ -48,6 +56,9 @@ class SearchBooks extends Component {
     });
   };
 
+  // When BookDetails is open from Book,
+  // Book sends the id of the book selected to the parent component,
+  // which then sends it to App (needed to get the path to BookDetails)
   sendBookId = id => {
     this.props.getBookId(id);
   };
@@ -89,9 +100,9 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           {showingBooks.length > 0 && (
-            <div class="query-result">
+            <div className="query-result">
               <p>Showing {showingBooks.length} results - </p>
-              <button class="reset-query-btn" onClick={this.clearQuery}>
+              <button className="reset-query-btn" onClick={this.clearQuery}>
                 Reset search
               </button>
             </div>

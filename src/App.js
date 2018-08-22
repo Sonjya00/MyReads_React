@@ -14,6 +14,7 @@ class BooksApp extends Component {
     bookId: ""
   };
 
+  // Get all books placed in a shelf
   componentDidMount() {
     BooksAPI.getAll().then(books =>
       this.setState({
@@ -22,6 +23,9 @@ class BooksApp extends Component {
     );
   }
 
+  // When a book changes shelf from either MyBooks or SearchBook,
+  // update the info in the server, get all the books again,
+  // and update the state/view on either those two pages
   updateShelves = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then(() => BooksAPI.getAll())
@@ -32,6 +36,10 @@ class BooksApp extends Component {
       );
   };
 
+  // When a book changes shelf from BookDetails,
+  // update the info in the server, get the single book changed,
+  // and update the state in the single book page.
+  // Then call updateShelves to update the other pages.
   updateShelves__BD = (book, shelf, id) => {
     BooksAPI.update(book, shelf)
       .then(() => BooksAPI.get(id))
@@ -44,6 +52,8 @@ class BooksApp extends Component {
       .then(() => this.updateShelves(book, shelf));
   };
 
+  // Get the id of the book selected (to open BookDetails)
+  // in order to set the path
   getBookId = id => {
     this.setState({ bookId: id });
   };

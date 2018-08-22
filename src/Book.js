@@ -12,10 +12,16 @@ class Book extends Component {
     });
   }
 
+  // When the book changes shelf,
+  // call onUpdateShelves on either MyBooks or SearchBooks and send the new data
   handleChangeShelf = event => {
     this.props.onUpdateShelves(this.props, event.target.value);
   };
 
+  // Upon opening BookDetails, send the book id to MyBooks or SearchBooks,
+  // which will then send it to App.
+  // Then store the id to the localStorage (or Bookdetails will lose this data
+  // upon refresh).
   handleClick = id => {
     id = this.props.id;
     this.props.sendBookId(id);
@@ -53,7 +59,7 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">
-          <Link to={path} onClick={this.handleClick} class="link">
+          <Link to={path} onClick={this.handleClick} className="link">
             {title}
           </Link>
         </div>
