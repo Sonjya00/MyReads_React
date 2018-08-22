@@ -20,12 +20,12 @@ class BooksApp extends Component {
   // Get initial state (book array and 3 shelves arrays)
   componentDidMount() {
     BooksAPI.getAll().then(books => {
-      this.updateShelfState(books);
+      this.updateStateShelf(books);
     });
   }
 
-  // Update books and shelves arrays when a books shelf changes
-  updateShelfState(books) {
+  // Update books and shelves arrays in the state when a books shelf changes
+  updateStateShelf(books) {
     this.setState({
       books: books,
       currentlyReading: books.filter(book => book.shelf === "currentlyReading"),
@@ -34,29 +34,13 @@ class BooksApp extends Component {
     });
   }
 
-  // When a book changes shelf from either MyBooks or SearchBook,
+  // When a book changes shelf from either MyBooks, SearchBook, or BookDetails,
   // update the info in the server, get all the books again,
-  // and update the state/view on either those two pages
-  updateShelves = (book, shelf) => {
+  // and call updateStateShelf to update the data in the App state as well
+  updateRemoteShelves = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then(() => BooksAPI.getAll())
-      .then(books => this.updateShelfState(books));
-  };
-
-  // When a book changes shelf from BookDetails,
-  // update the info in the server, get the single book changed,
-  // and update the state in the single book page.
-  // Then call updateShelves to update the other pages.
-  updateShelves__BD = (book, shelf, id) => {
-    BooksAPI.update(book, shelf)
-      .then(() => BooksAPI.get(id))
-      .then(data =>
-        this.setState({
-          book: data,
-          bookId: id
-        })
-      )
-      .then(() => this.updateShelves(book, shelf));
+      .then(books => this.updateStateShelf(books));
   };
 
   // Get the id of the book selected (to open BookDetails)
@@ -76,11 +60,10 @@ class BooksApp extends Component {
           path="/"
           render={() => (
             <MyBooks
-              books={this.state.books}
               currentlyReading={this.state.currentlyReading}
               wantToRead={this.state.wantToRead}
               read={this.state.read}
-              updateShelves={this.updateShelves}
+              updateRemoteShelves={this.updateRemoteShelves}
               getBookId={this.getBookId}
             />
           )}
@@ -89,8 +72,7 @@ class BooksApp extends Component {
           path="/search"
           render={() => (
             <SearchBooks
-              books={this.state.books}
-              updateShelves={this.updateShelves}
+              updateRemoteShelves={this.updateRemoteShelves}
               getBookId={this.getBookId}
             />
           )}
@@ -99,9 +81,8 @@ class BooksApp extends Component {
           path={bookDetailPath}
           render={() => (
             <BookDetails
-              books={this.state.books}
-              onUpdateShelves__BD={(book, shelf, id) =>
-                this.updateShelves__BD(book, shelf, id)
+              onUpdateRemoteShelves={(book, shelf) =>
+                this.updateRemoteShelves(book, shelf)
               }
               bookId={bookId}
             />

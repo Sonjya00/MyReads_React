@@ -25,15 +25,11 @@ class BookDetails extends Component {
 
   // When the shelf is changed with the select, the shelf on the state updates
   // And the new data is sent to App
-  handleChangeShelf__BD = event => {
+  handleChangeShelf = event => {
     this.setState({
       shelf: event.target.value
     });
-    this.props.onUpdateShelves__BD(
-      this.state.book,
-      event.target.value,
-      this.state.bookId
-    );
+    this.props.onUpdateRemoteShelves(this.state.book, event.target.value);
   };
 
   render() {
@@ -101,7 +97,7 @@ class BookDetails extends Component {
                     <select
                       id={id}
                       value={shelf}
-                      onChange={this.handleChangeShelf__BD}
+                      onChange={this.handleChangeShelf}
                     >
                       <option value="move" disabled>
                         Move to...

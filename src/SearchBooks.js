@@ -57,7 +57,7 @@ class SearchBooks extends Component {
   };
 
   render() {
-    const { updateShelves } = this.props;
+    const { updateRemoteShelves } = this.props;
     const { query, showingBooks } = this.state;
 
     return (
@@ -99,11 +99,13 @@ class SearchBooks extends Component {
               showingBooks.map(book => (
                 <Book
                   key={book.id}
-                  onUpdateShelves={(book, shelf) => updateShelves(book, shelf)}
+                  onUpdateRemoteShelves={(book, shelf) =>
+                    updateRemoteShelves(book, shelf)
+                  }
                   // When BookDetails is open from Book,
                   // Book sends the id of the book selected to the parent component,
                   // which then sends it to App (needed to get the path to BookDetails)
-                  onsendBookId={id => {
+                  onSendBookId={id => {
                     this.props.getBookId(id);
                   }}
                   id={book.id}

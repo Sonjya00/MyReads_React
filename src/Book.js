@@ -13,9 +13,9 @@ class Book extends Component {
   }
 
   // When the book changes shelf,
-  // call onUpdateShelves on either MyBooks or SearchBooks and send the new data
+  // call onUpdateRemoteShelves on either MyBooks or SearchBooks and send the new data
   handleChangeShelf = event => {
-    this.props.onUpdateShelves(this.props, event.target.value);
+    this.props.onUpdateRemoteShelves(this.props, event.target.value);
   };
 
   // Upon opening BookDetails, send the book id to MyBooks or SearchBooks,
@@ -24,7 +24,7 @@ class Book extends Component {
   // upon refresh).
   handleClick = id => {
     id = this.props.id;
-    this.props.onsendBookId(id);
+    this.props.onSendBookId(id);
     localStorage.setItem("bookId", JSON.stringify(id));
   };
 

@@ -8,7 +8,12 @@ class MyBooks extends Component {
   // };
 
   render() {
-    const { books, updateShelves } = this.props;
+    const {
+      currentlyReading,
+      wantToRead,
+      read,
+      updateRemoteShelves
+    } = this.props;
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -23,33 +28,29 @@ class MyBooks extends Component {
               </h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {books
-                    .filter(book => book.shelf === "currentlyReading")
-                    .map(book => {
-                      return (
-                        <Book
-                          key={book.id}
-                          onUpdateShelves={(book, shelf) =>
-                            updateShelves(book, shelf)
-                          }
-                          // When BookDetails is open from Book,
-                          // Book sends the id of the book selected to the parent component,
-                          // which then sends it to App (needed to get the path to BookDetails)
-                          onsendBookId={id => {
-                            this.props.getBookId(id);
-                          }}
-                          id={book.id}
-                          shelf={book.shelf}
-                          img={
-                            book.imageLinks
-                              ? book.imageLinks.smallThumbnail
-                              : ""
-                          }
-                          title={book.title}
-                          author={book.authors}
-                        />
-                      );
-                    })}
+                  {currentlyReading.map(book => {
+                    return (
+                      <Book
+                        key={book.id}
+                        onUpdateRemoteShelves={(book, shelf) =>
+                          updateRemoteShelves(book, shelf)
+                        }
+                        // When BookDetails is open from Book,
+                        // Book sends the id of the book selected to the parent component,
+                        // which then sends it to App (needed to get the path to BookDetails)
+                        onSendBookId={id => {
+                          this.props.getBookId(id);
+                        }}
+                        id={book.id}
+                        shelf={book.shelf}
+                        img={
+                          book.imageLinks ? book.imageLinks.smallThumbnail : ""
+                        }
+                        title={book.title}
+                        author={book.authors}
+                      />
+                    );
+                  })}
                 </ol>
               </div>
             </div>
@@ -60,30 +61,26 @@ class MyBooks extends Component {
               </h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {books
-                    .filter(book => book.shelf === "wantToRead")
-                    .map(book => {
-                      return (
-                        <Book
-                          key={book.id}
-                          onUpdateShelves={(book, shelf) =>
-                            updateShelves(book, shelf)
-                          }
-                          sendBookId={id => {
-                            this.props.getBookId(id);
-                          }}
-                          id={book.id}
-                          shelf={book.shelf}
-                          img={
-                            book.imageLinks
-                              ? book.imageLinks.smallThumbnail
-                              : ""
-                          }
-                          title={book.title}
-                          author={book.authors}
-                        />
-                      );
-                    })}
+                  {wantToRead.map(book => {
+                    return (
+                      <Book
+                        key={book.id}
+                        onUpdateRemoteShelves={(book, shelf) =>
+                          updateRemoteShelves(book, shelf)
+                        }
+                        onSendBookId={id => {
+                          this.props.getBookId(id);
+                        }}
+                        id={book.id}
+                        shelf={book.shelf}
+                        img={
+                          book.imageLinks ? book.imageLinks.smallThumbnail : ""
+                        }
+                        title={book.title}
+                        author={book.authors}
+                      />
+                    );
+                  })}
                 </ol>
               </div>
             </div>
@@ -94,14 +91,16 @@ class MyBooks extends Component {
               </h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {books.filter(book => book.shelf === "read").map(book => {
+                  {read.map(book => {
                     return (
                       <Book
                         key={book.id}
-                        onUpdateShelves={(book, shelf) =>
-                          updateShelves(book, shelf)
+                        onUpdateRemoteShelves={(book, shelf) =>
+                          updateRemoteShelves(book, shelf)
                         }
-                        sendBookId={this.sendBookId}
+                        onSendBookId={id => {
+                          this.props.getBookId(id);
+                        }}
                         id={book.id}
                         shelf={book.shelf}
                         img={
