@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import Book from "./Book.js";
 
 class MyBooks extends Component {
-  // state = {
-  //   books: this.props.books
-  // };
-
   render() {
     const {
       currentlyReading,

@@ -281,7 +281,7 @@ body,
 }
 
 .book-details--info {
-  margin-top: 70px;
+  margin-top: 50px;
   margin-left: 30px;
   line-height: 30px;
   list-style-type: none;
@@ -328,4 +328,35 @@ body,
   display: block;
   top: 10px;
   left: 95%;
+}
+
+.shelf-tag {
+  /* background: linear-gradient(to top, #4d9c04, #5ab803, #83e02c); */
+  padding: 2px;
+  color: white;
+  display: block;
+  width: 130px;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+  top: 30px;
+  left: 30px;
+  transition: all 0.7s;
+}
+
+.shelf-reading {
+  background-color: #06a9d6;
+}
+
+.shelf-want-to-read {
+  background-color: #d606a9;
+}
+
+.shelf-read {
+  background-color: #4d9c04;
+}
+
+.shelf-none {
+  visibility: hidden;
 }

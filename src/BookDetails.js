@@ -114,6 +114,17 @@ class BookDetails extends Component {
               </div>
 
               <div className="book-details__top--right">
+                {shelf === "currentlyReading" ? (
+                  <span className="shelf-tag shelf-reading">Now Reading</span>
+                ) : shelf === "wantToRead" ? (
+                  <span className="shelf-tag shelf-want-to-read">
+                    Want to read
+                  </span>
+                ) : shelf === "read" ? (
+                  <span className="shelf-tag shelf-read">Already Read</span>
+                ) : (
+                  <span className="shelf-tag shelf-none">Read</span>
+                )}
                 <ul className="book-details--info">
                   <li>
                     <span className="book-details--strong">Category: </span>
