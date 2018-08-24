@@ -6,6 +6,8 @@ class BookDetails extends Component {
   state = {
     book: "",
     bookId: "",
+    authors: [],
+    categories: [],
     shelf: "none",
     loading: true
   };
@@ -17,6 +19,16 @@ class BookDetails extends Component {
       this.setState({
         book: data,
         bookId: bookId,
+        authors: !data.authors
+          ? ""
+          : data.authors.length > 0
+            ? data.authors.join(", ")
+            : "",
+        categories: !data.categories
+          ? ""
+          : data.categories.length > 0
+            ? data.categories.join(", ")
+            : "",
         shelf: data.shelf,
         loading: false
       });
@@ -35,9 +47,7 @@ class BookDetails extends Component {
   render() {
     const {
       id,
-      authors,
       canonicalVolumeLink,
-      categories,
       description,
       pageCount,
       publishedDate,
@@ -45,7 +55,8 @@ class BookDetails extends Component {
       language,
       title
     } = this.state.book;
-    const shelf = this.state.shelf;
+    const { authors, categories, shelf } = this.state;
+    console.log(this.state.book);
     return (
       <div className="book-details__container">
         <div className="list-books-title">

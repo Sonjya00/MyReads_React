@@ -112,7 +112,7 @@ class SearchBooks extends Component {
                   shelf={book.shelf}
                   img={book.imageLinks ? book.imageLinks.smallThumbnail : ""}
                   title={book.title}
-                  author={book.authors}
+                  authors={book.authors}
                 />
               ))
             ) : this.state.query === "" ? (

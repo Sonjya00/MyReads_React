@@ -43,7 +43,7 @@ class MyBooks extends Component {
                           book.imageLinks ? book.imageLinks.smallThumbnail : ""
                         }
                         title={book.title}
-                        author={book.authors}
+                        authors={book.authors}
                       />
                     );
                   })}
@@ -73,7 +73,7 @@ class MyBooks extends Component {
                           book.imageLinks ? book.imageLinks.smallThumbnail : ""
                         }
                         title={book.title}
-                        author={book.authors}
+                        authors={book.authors}
                       />
                     );
                   })}
@@ -103,7 +103,7 @@ class MyBooks extends Component {
                           book.imageLinks ? book.imageLinks.smallThumbnail : ""
                         }
                         title={book.title}
-                        author={book.authors}
+                        authors={book.authors}
                       />
                     );
                   })}

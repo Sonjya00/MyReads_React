@@ -3,12 +3,18 @@ import { Link } from "react-router-dom";
 
 class Book extends Component {
   state = {
+    authors: [],
     shelf: "none"
   };
 
   componentDidMount() {
     this.setState({
-      shelf: this.props.shelf
+      shelf: this.props.shelf,
+      authors: !this.props.authors
+        ? ""
+        : this.props.authors.length > 0
+          ? this.props.authors.join(", ")
+          : ""
     });
   }
 
@@ -29,7 +35,8 @@ class Book extends Component {
   };
 
   render() {
-    const { img, id, title, author } = this.props;
+    const { img, id, title } = this.props;
+    const { authors, shelf } = this.state;
     const path = `/details/${id}`;
     return (
       <li className="book">
@@ -43,11 +50,7 @@ class Book extends Component {
             }}
           />
           <div className="book-shelf-changer">
-            <select
-              id={id}
-              value={this.state.shelf}
-              onChange={this.handleChangeShelf}
-            >
+            <select id={id} value={shelf} onChange={this.handleChangeShelf}>
               <option value="move" disabled>
                 Move to...
               </option>
@@ -63,7 +66,7 @@ class Book extends Component {
             {title}
           </Link>
         </div>
-        <div className="book-authors">{author}</div>
+        <div className="book-authors">{authors}</div>
       </li>
     );
   }
