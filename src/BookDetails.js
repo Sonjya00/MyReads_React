@@ -19,16 +19,8 @@ class BookDetails extends Component {
       this.setState({
         book: data,
         bookId: bookId,
-        authors: !data.authors
-          ? ""
-          : data.authors.length > 0
-            ? data.authors.join(", ")
-            : "",
-        categories: !data.categories
-          ? ""
-          : data.categories.length > 0
-            ? data.categories.join(", ")
-            : "",
+        authors: this.props.handleArrays(data.authors),
+        categories: this.props.handleArrays(data.categories),
         shelf: data.shelf,
         loading: false
       });
@@ -46,17 +38,17 @@ class BookDetails extends Component {
 
   render() {
     const {
-      id,
       canonicalVolumeLink,
       description,
+      id,
+      imageLinks,
+      language,
       pageCount,
       publishedDate,
       publisher,
-      language,
       title
     } = this.state.book;
     const { authors, categories, shelf } = this.state;
-    console.log(this.state.book);
     return (
       <div className="book-details__container">
         <div className="list-books-title">
@@ -98,9 +90,7 @@ class BookDetails extends Component {
                       width: 192,
                       height: 282,
                       backgroundImage: `url(${
-                        this.state.book.imageLinks
-                          ? this.state.book.imageLinks.thumbnail
-                          : ""
+                        imageLinks ? imageLinks.thumbnail : ""
                       })`
                     }}
                   />

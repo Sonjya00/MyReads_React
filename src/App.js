@@ -49,6 +49,11 @@ class BooksApp extends Component {
     this.setState({ bookId: id });
   };
 
+  // handle book data with the array type
+  handleArrays(data) {
+    return !data ? "" : data.length > 0 ? data.join(", ") : "";
+  }
+
   render() {
     let bookId = this.state.bookId;
     let bookDetailPath = `/details/${this.state.bookId}`;
@@ -65,6 +70,7 @@ class BooksApp extends Component {
               read={this.state.read}
               updateRemoteShelves={this.updateRemoteShelves}
               getBookId={this.getBookId}
+              handleArrays={this.handleArrays}
             />
           )}
         />
@@ -74,6 +80,7 @@ class BooksApp extends Component {
             <SearchBooks
               updateRemoteShelves={this.updateRemoteShelves}
               getBookId={this.getBookId}
+              handleArrays={this.handleArrays}
             />
           )}
         />
@@ -85,6 +92,7 @@ class BooksApp extends Component {
                 this.updateRemoteShelves(book, shelf)
               }
               bookId={bookId}
+              handleArrays={this.handleArrays}
             />
           )}
         />

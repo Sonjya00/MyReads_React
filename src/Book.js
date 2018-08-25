@@ -10,11 +10,7 @@ class Book extends Component {
   componentDidMount() {
     this.setState({
       shelf: this.props.shelf,
-      authors: !this.props.authors
-        ? ""
-        : this.props.authors.length > 0
-          ? this.props.authors.join(", ")
-          : ""
+      authors: this.props.handleArrays(this.props.authors)
     });
   }
 

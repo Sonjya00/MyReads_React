@@ -134,7 +134,8 @@ body,
 }
 
 .query-result p,
-.reset-query-btn {
+.reset-query-btn,
+.keywords-section {
   display: inline-block;
 }
 
@@ -145,12 +146,22 @@ body,
   border: none;
   color: #06a9d6;
   cursor: pointer;
+  margin-right: 5px;
 }
 
 .reset-query-btn:hover,
 .keyword-btn:hover {
   color: #0678d6;
 }
+
+/* .keyword-btn::after {
+  content: "";
+  display: inline-block;
+  border: 1px solid grey;
+  width: 5px;
+  margin-left: 15px;
+  margin-bottom: 3px;
+} */
 
 /* books grid */
 

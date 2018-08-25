@@ -20,14 +20,20 @@ class MyBooks extends Component {
             {/* CURRENTLY READING BOOKS */}
             <div className="bookshelf">
               <h2 className="bookshelf-title">
-                Currently Reading ({this.props.currentlyReading.length})
+                Currently Reading ({currentlyReading.length})
               </h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {currentlyReading.map(book => {
+                    const { id, shelf, imageLinks, title, authors } = book;
                     return (
                       <Book
-                        key={book.id}
+                        key={id}
+                        id={id}
+                        shelf={shelf}
+                        img={imageLinks ? imageLinks.smallThumbnail : ""}
+                        title={title}
+                        authors={authors}
                         onUpdateRemoteShelves={(book, shelf) =>
                           updateRemoteShelves(book, shelf)
                         }
@@ -37,13 +43,7 @@ class MyBooks extends Component {
                         onSendBookId={id => {
                           this.props.getBookId(id);
                         }}
-                        id={book.id}
-                        shelf={book.shelf}
-                        img={
-                          book.imageLinks ? book.imageLinks.smallThumbnail : ""
-                        }
-                        title={book.title}
-                        authors={book.authors}
+                        handleArrays={this.props.handleArrays}
                       />
                     );
                   })}
@@ -53,27 +53,27 @@ class MyBooks extends Component {
             {/* WANT TO READ BOOKS */}
             <div className="bookshelf">
               <h2 className="bookshelf-title">
-                Want to Read ({this.props.wantToRead.length})
+                Want to Read ({wantToRead.length})
               </h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {wantToRead.map(book => {
+                    const { id, shelf, imageLinks, title, authors } = book;
                     return (
                       <Book
-                        key={book.id}
+                        key={id}
+                        id={id}
+                        shelf={shelf}
+                        img={imageLinks ? imageLinks.smallThumbnail : ""}
+                        title={title}
+                        authors={authors}
                         onUpdateRemoteShelves={(book, shelf) =>
                           updateRemoteShelves(book, shelf)
                         }
                         onSendBookId={id => {
                           this.props.getBookId(id);
                         }}
-                        id={book.id}
-                        shelf={book.shelf}
-                        img={
-                          book.imageLinks ? book.imageLinks.smallThumbnail : ""
-                        }
-                        title={book.title}
-                        authors={book.authors}
+                        handleArrays={this.props.handleArrays}
                       />
                     );
                   })}
@@ -82,28 +82,26 @@ class MyBooks extends Component {
             </div>
             {/* READ BOOKS */}
             <div className="bookshelf">
-              <h2 className="bookshelf-title">
-                Read ({this.props.read.length})
-              </h2>
+              <h2 className="bookshelf-title">Read ({read.length})</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {read.map(book => {
+                    const { id, shelf, imageLinks, title, authors } = book;
                     return (
                       <Book
-                        key={book.id}
+                        key={id}
+                        id={id}
+                        shelf={shelf}
+                        img={imageLinks ? imageLinks.smallThumbnail : ""}
+                        title={title}
+                        authors={authors}
                         onUpdateRemoteShelves={(book, shelf) =>
                           updateRemoteShelves(book, shelf)
                         }
                         onSendBookId={id => {
                           this.props.getBookId(id);
                         }}
-                        id={book.id}
-                        shelf={book.shelf}
-                        img={
-                          book.imageLinks ? book.imageLinks.smallThumbnail : ""
-                        }
-                        title={book.title}
-                        authors={book.authors}
+                        handleArrays={this.props.handleArrays}
                       />
                     );
                   })}
