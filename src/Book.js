@@ -2,18 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Book extends Component {
-  state = {
-    authors: [],
-    shelf: "none"
-  };
-
-  componentDidMount() {
-    this.setState({
-      shelf: this.props.shelf,
-      authors: this.props.handleArrays(this.props.authors)
-    });
-  }
-
   // When the book changes shelf,
   // call onUpdateRemoteShelves on either MyBooks or SearchBooks and send the new data
   handleChangeShelf = event => {
@@ -31,8 +19,7 @@ class Book extends Component {
   };
 
   render() {
-    const { img, id, title } = this.props;
-    const { authors, shelf } = this.state;
+    const { authors, id, img, shelf, title, handleData } = this.props;
     const path = `/details/${id}`;
     return (
       <li className="book">
@@ -62,7 +49,7 @@ class Book extends Component {
             {title}
           </Link>
         </div>
-        <div className="book-authors">{authors}</div>
+        <div className="book-authors">{handleData(authors)}</div>
       </li>
     );
   }

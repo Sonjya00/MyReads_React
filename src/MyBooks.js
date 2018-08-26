@@ -8,7 +8,9 @@ class MyBooks extends Component {
       currentlyReading,
       wantToRead,
       read,
-      updateRemoteShelves
+      updateRemoteShelves,
+      getBookId,
+      handleData
     } = this.props;
     return (
       <div className="list-books">
@@ -40,10 +42,8 @@ class MyBooks extends Component {
                         // When BookDetails is open from Book,
                         // Book sends the id of the book selected to the parent component,
                         // which then sends it to App (needed to get the path to BookDetails)
-                        onSendBookId={id => {
-                          this.props.getBookId(id);
-                        }}
-                        handleArrays={this.props.handleArrays}
+                        onSendBookId={id => getBookId(id)}
+                        handleData={handleData}
                       />
                     );
                   })}
@@ -70,10 +70,8 @@ class MyBooks extends Component {
                         onUpdateRemoteShelves={(book, shelf) =>
                           updateRemoteShelves(book, shelf)
                         }
-                        onSendBookId={id => {
-                          this.props.getBookId(id);
-                        }}
-                        handleArrays={this.props.handleArrays}
+                        onSendBookId={id => getBookId(id)}
+                        handleData={handleData}
                       />
                     );
                   })}
@@ -98,10 +96,8 @@ class MyBooks extends Component {
                         onUpdateRemoteShelves={(book, shelf) =>
                           updateRemoteShelves(book, shelf)
                         }
-                        onSendBookId={id => {
-                          this.props.getBookId(id);
-                        }}
-                        handleArrays={this.props.handleArrays}
+                        onSendBookId={id => getBookId(id)}
+                        handleData={handleData}
                       />
                     );
                   })}

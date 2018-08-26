@@ -10,7 +10,6 @@ import "./App.css";
 
 class BooksApp extends Component {
   state = {
-    books: [],
     currentlyReading: [],
     wantToRead: [],
     read: [],
@@ -27,7 +26,7 @@ class BooksApp extends Component {
   // Update books and shelves arrays in the state when a books shelf changes
   updateStateShelf(books) {
     this.setState({
-      books: books,
+      //books: books,
       currentlyReading: books.filter(book => book.shelf === "currentlyReading"),
       wantToRead: books.filter(book => book.shelf === "wantToRead"),
       read: books.filter(book => book.shelf === "read")
@@ -47,6 +46,10 @@ class BooksApp extends Component {
   // in order to set the path
   getBookId = id => {
     this.setState({ bookId: id });
+  };
+
+  handleData = data => {
+    return data ? (Array.isArray(data) ? this.handleArrays(data) : data) : null;
   };
 
   // handle book data with the array type
@@ -70,7 +73,7 @@ class BooksApp extends Component {
               read={this.state.read}
               updateRemoteShelves={this.updateRemoteShelves}
               getBookId={this.getBookId}
-              handleArrays={this.handleArrays}
+              handleData={this.handleData}
             />
           )}
         />
@@ -80,7 +83,7 @@ class BooksApp extends Component {
             <SearchBooks
               updateRemoteShelves={this.updateRemoteShelves}
               getBookId={this.getBookId}
-              handleArrays={this.handleArrays}
+              handleData={this.handleData}
             />
           )}
         />
@@ -92,7 +95,7 @@ class BooksApp extends Component {
                 this.updateRemoteShelves(book, shelf)
               }
               bookId={bookId}
-              handleArrays={this.handleArrays}
+              handleData={this.handleData}
             />
           )}
         />

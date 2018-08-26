@@ -5,9 +5,6 @@ import * as BooksAPI from "./BooksAPI";
 class BookDetails extends Component {
   state = {
     book: "",
-    bookId: "",
-    authors: [],
-    categories: [],
     shelf: "none",
     loading: true
   };
@@ -18,9 +15,6 @@ class BookDetails extends Component {
     BooksAPI.get(bookId).then(data => {
       this.setState({
         book: data,
-        bookId: bookId,
-        authors: this.props.handleArrays(data.authors),
-        categories: this.props.handleArrays(data.categories),
         shelf: data.shelf,
         loading: false
       });
@@ -38,7 +32,9 @@ class BookDetails extends Component {
 
   render() {
     const {
+      authors,
       canonicalVolumeLink,
+      categories,
       description,
       id,
       imageLinks,
@@ -48,7 +44,18 @@ class BookDetails extends Component {
       publisher,
       title
     } = this.state.book;
-    const { authors, categories, shelf } = this.state;
+    const { shelf } = this.state;
+    const { handleData } = this.props;
+    const bookInfoLi = (info, title) => {
+      if (info) {
+        return (
+          <li>
+            <span className="book-details--strong">{title}: </span>
+            {handleData(info)}
+          </li>
+        );
+      }
+    };
     return (
       <div className="book-details__container">
         <div className="list-books-title">
@@ -79,7 +86,9 @@ class BookDetails extends Component {
           <div className="book-details__book">
             <div className="book-details__title">
               <h2>{title}</h2>
-              {authors && <p className="book-details__author">By {authors}</p>}
+              {authors && (
+                <p className="book-details__author">By {handleData(authors)}</p>
+              )}
             </div>
             <div className="book-details__top">
               <div className="book-details__top--left">
@@ -127,28 +136,11 @@ class BookDetails extends Component {
                   <span className="shelf-tag shelf-none">Read</span>
                 )}
                 <ul className="book-details--info">
-                  <li>
-                    <span className="book-details--strong">Category: </span>
-                    {categories ? categories : "N/A"}
-                  </li>
-                  <li>
-                    <span className="book-details--strong">Language: </span>
-                    {language ? language : "N/A"}
-                  </li>
-                  <li>
-                    <span className="book-details--strong">Pages: </span>
-                    {pageCount ? pageCount : "N/A"}
-                  </li>
-                  <li>
-                    <span className="book-details--strong">Publisher: </span>
-                    {publisher ? publisher : "N/A"}
-                  </li>
-                  <li>
-                    <span className="book-details--strong">
-                      Date of publication:{" "}
-                    </span>
-                    {publishedDate ? publishedDate : "N/A"}
-                  </li>
+                  {bookInfoLi(categories, "Category")}
+                  {bookInfoLi(language, "Language")}
+                  {bookInfoLi(pageCount, "Pages")}
+                  {bookInfoLi(publisher, "Publisher")}
+                  {bookInfoLi(publishedDate, "Date of publication")}
                 </ul>
                 <a
                   href={canonicalVolumeLink}

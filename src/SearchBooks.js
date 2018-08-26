@@ -57,7 +57,7 @@ class SearchBooks extends Component {
   };
 
   render() {
-    const { updateRemoteShelves } = this.props;
+    const { updateRemoteShelves, handleData } = this.props;
     const { query, showingBooks } = this.state;
     const keywords = {
       authors: [
@@ -213,7 +213,7 @@ class SearchBooks extends Component {
                   onSendBookId={id => {
                     this.props.getBookId(id);
                   }}
-                  handleArrays={this.props.handleArrays}
+                  handleData={handleData}
                 />
               ))
             ) : this.state.query === "" ? (
