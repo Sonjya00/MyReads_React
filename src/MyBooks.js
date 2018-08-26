@@ -9,7 +9,7 @@ class MyBooks extends Component {
       wantToRead,
       read,
       updateRemoteShelves,
-      getBookId,
+      // getBookId,
       handleData
     } = this.props;
     return (
@@ -42,7 +42,7 @@ class MyBooks extends Component {
                         // When BookDetails is open from Book,
                         // Book sends the id of the book selected to the parent component,
                         // which then sends it to App (needed to get the path to BookDetails)
-                        onSendBookId={id => getBookId(id)}
+                        // onSendBookId={id => getBookId(id)}
                         handleData={handleData}
                       />
                     );
@@ -70,7 +70,7 @@ class MyBooks extends Component {
                         onUpdateRemoteShelves={(book, shelf) =>
                           updateRemoteShelves(book, shelf)
                         }
-                        onSendBookId={id => getBookId(id)}
+                        // onSendBookId={id => getBookId(id)}
                         handleData={handleData}
                       />
                     );
@@ -96,7 +96,7 @@ class MyBooks extends Component {
                         onUpdateRemoteShelves={(book, shelf) =>
                           updateRemoteShelves(book, shelf)
                         }
-                        onSendBookId={id => getBookId(id)}
+                        // onSendBookId={id => getBookId(id)}
                         handleData={handleData}
                       />
                     );

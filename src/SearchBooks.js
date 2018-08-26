@@ -210,9 +210,9 @@ class SearchBooks extends Component {
                   // When BookDetails is open from Book,
                   // Book sends the id of the book selected to the parent component,
                   // which then sends it to App (needed to get the path to BookDetails)
-                  onSendBookId={id => {
-                    this.props.getBookId(id);
-                  }}
+                  // onSendBookId={id => {
+                  //   this.props.getBookId(id);
+                  // }}
                   handleData={handleData}
                 />
               ))

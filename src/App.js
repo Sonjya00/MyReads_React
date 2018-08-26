@@ -12,8 +12,8 @@ class BooksApp extends Component {
   state = {
     currentlyReading: [],
     wantToRead: [],
-    read: [],
-    bookId: ""
+    read: []
+    // bookId: ""
   };
 
   // Get initial state (book array and 3 shelves arrays)
@@ -44,9 +44,9 @@ class BooksApp extends Component {
 
   // Get the id of the book selected (to open BookDetails)
   // in order to set the path
-  getBookId = id => {
-    this.setState({ bookId: id });
-  };
+  // getBookId = id => {
+  //   this.setState({ bookId: id });
+  // };
 
   handleData = data => {
     return data ? (Array.isArray(data) ? this.handleArrays(data) : data) : null;
@@ -58,8 +58,11 @@ class BooksApp extends Component {
   }
 
   render() {
-    let bookId = this.state.bookId;
-    let bookDetailPath = `/details/${this.state.bookId}`;
+    // let bookId = this.state.bookId;
+    let bookDetailPath = `/details/${JSON.parse(
+      localStorage.getItem("bookId")
+    )}`;
+    // let bookDetailPath = `/details/${this.state.bookId}`;
 
     return (
       <div className="app">
@@ -72,7 +75,7 @@ class BooksApp extends Component {
               wantToRead={this.state.wantToRead}
               read={this.state.read}
               updateRemoteShelves={this.updateRemoteShelves}
-              getBookId={this.getBookId}
+              // getBookId={this.getBookId}
               handleData={this.handleData}
             />
           )}
@@ -82,19 +85,20 @@ class BooksApp extends Component {
           render={() => (
             <SearchBooks
               updateRemoteShelves={this.updateRemoteShelves}
-              getBookId={this.getBookId}
+              // getBookId={this.getBookId}
               handleData={this.handleData}
             />
           )}
         />
         <Route
+          exact
           path={bookDetailPath}
           render={() => (
             <BookDetails
               onUpdateRemoteShelves={(book, shelf) =>
                 this.updateRemoteShelves(book, shelf)
               }
-              bookId={bookId}
+              // bookId={bookId}
               handleData={this.handleData}
             />
           )}
