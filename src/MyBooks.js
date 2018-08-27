@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Book from "./Book.js";
+import Book from "./Book";
 
 class MyBooks extends Component {
+  clearShelf = shelf =>
+    shelf.map(book => this.props.updateRemoteShelves(book, "none"));
   render() {
     const {
       currentlyReading,
       wantToRead,
       read,
       updateRemoteShelves,
-      // getBookId,
       handleData
     } = this.props;
     return (
@@ -24,31 +25,46 @@ class MyBooks extends Component {
               <h2 className="bookshelf__title">
                 Currently Reading ({currentlyReading.length})
               </h2>
-              <div className="bookshelf__books">
-                <ol className="books-grid--g">
-                  {currentlyReading.map(book => {
-                    const { id, shelf, imageLinks, title, authors } = book;
-                    return (
-                      <Book
-                        key={id}
-                        id={id}
-                        shelf={shelf}
-                        img={imageLinks ? imageLinks.smallThumbnail : ""}
-                        title={title}
-                        authors={authors}
-                        onUpdateRemoteShelves={(book, shelf) =>
-                          updateRemoteShelves(book, shelf)
-                        }
-                        // When BookDetails is open from Book,
-                        // Book sends the id of the book selected to the parent component,
-                        // which then sends it to App (needed to get the path to BookDetails)
-                        // onSendBookId={id => getBookId(id)}
-                        handleData={handleData}
-                      />
-                    );
-                  })}
-                </ol>
-              </div>
+              {currentlyReading.length === 0 ? (
+                <p>
+                  There are no books on this shelf. Add some from the{" "}
+                  <Link className="link" to="/search">
+                    Search Page
+                  </Link>
+                </p>
+              ) : (
+                <div className="bookshelf__books">
+                  <button
+                    className="reset-query-btn"
+                    onClick={() => this.clearShelf(currentlyReading)}
+                  >
+                    Clear this shelf
+                  </button>
+                  <ol className="books-grid--g">
+                    {currentlyReading.map(book => {
+                      const { id, shelf, imageLinks, title, authors } = book;
+                      return (
+                        <Book
+                          key={id}
+                          id={id}
+                          shelf={shelf}
+                          img={imageLinks ? imageLinks.smallThumbnail : ""}
+                          title={title}
+                          authors={authors}
+                          onUpdateRemoteShelves={(book, shelf) =>
+                            updateRemoteShelves(book, shelf)
+                          }
+                          // When BookDetails is open from Book,
+                          // Book sends the id of the book selected to the parent component,
+                          // which then sends it to App (needed to get the path to BookDetails)
+                          // onSendBookId={id => getBookId(id)}
+                          handleData={handleData}
+                        />
+                      );
+                    })}
+                  </ol>
+                </div>
+              )}
             </div>
             {/* WANT TO READ BOOKS */}
             <div className="bookshelf">

@@ -105,7 +105,9 @@ class BookDetails extends Component {
                   >
                     {" "}
                     {!imageLinks && (
-                      <span class="book-cover--alt">Image not available</span>
+                      <span className="book-cover--alt">
+                        Image not available
+                      </span>
                     )}
                   </div>
                   <div className="book-shelf-changer--g">

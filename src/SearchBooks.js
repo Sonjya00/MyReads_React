@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
-import Book from "./Book.js";
+import Book from "./Book";
 
 class SearchBooks extends Component {
   state = {
@@ -203,26 +203,23 @@ class SearchBooks extends Component {
             {/* BEGINNING OF CONDITIONAL RENDERING, 4 OPTIONS */}
             {showingBooks.length > 0 ? (
               // If there are books that match the query, show the books
-              showingBooks.map(book => (
-                <Book
-                  key={book.id}
-                  id={book.id}
-                  shelf={book.shelf}
-                  img={book.imageLinks ? book.imageLinks.smallThumbnail : ""}
-                  title={book.title}
-                  authors={book.authors}
-                  onUpdateRemoteShelves={(book, shelf) =>
-                    updateRemoteShelves(book, shelf)
-                  }
-                  // When BookDetails is open from Book,
-                  // Book sends the id of the book selected to the parent component,
-                  // which then sends it to App (needed to get the path to BookDetails)
-                  // onSendBookId={id => {
-                  //   this.props.getBookId(id);
-                  // }}
-                  handleData={handleData}
-                />
-              ))
+              showingBooks.map(book => {
+                const { id, shelf, imageLinks, title, authors } = book;
+                return (
+                  <Book
+                    key={id}
+                    id={id}
+                    shelf={shelf}
+                    img={imageLinks ? imageLinks.smallThumbnail : ""}
+                    title={title}
+                    authors={authors}
+                    onUpdateRemoteShelves={(book, shelf) =>
+                      updateRemoteShelves(book, shelf)
+                    }
+                    handleData={handleData}
+                  />
+                );
+              })
             ) : this.state.query === "" ? (
               // If there are no matching results, check if the query is empty.
               // If it is, show initial screen with suggested keywords
