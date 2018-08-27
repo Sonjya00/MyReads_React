@@ -13,7 +13,6 @@ class BooksApp extends Component {
     currentlyReading: [],
     wantToRead: [],
     read: []
-    // bookId: ""
   };
 
   // Get initial state (book array and 3 shelves arrays)
@@ -26,7 +25,6 @@ class BooksApp extends Component {
   // Update books and shelves arrays in the state when a books shelf changes
   updateStateShelf(books) {
     this.setState({
-      //books: books,
       currentlyReading: books.filter(book => book.shelf === "currentlyReading"),
       wantToRead: books.filter(book => book.shelf === "wantToRead"),
       read: books.filter(book => book.shelf === "read")
@@ -42,27 +40,20 @@ class BooksApp extends Component {
       .then(books => this.updateStateShelf(books));
   };
 
-  // Get the id of the book selected (to open BookDetails)
-  // in order to set the path
-  // getBookId = id => {
-  //   this.setState({ bookId: id });
-  // };
-
+  // handle book data of any type
   handleData = data => {
     return data ? (Array.isArray(data) ? this.handleArrays(data) : data) : null;
   };
 
-  // handle book data with the array type
+  // handle book data of the array type
   handleArrays(data) {
     return !data ? "" : data.length > 0 ? data.join(", ") : "";
   }
 
   render() {
-    // let bookId = this.state.bookId;
     let bookDetailPath = `/details/${JSON.parse(
       localStorage.getItem("bookId")
     )}`;
-    // let bookDetailPath = `/details/${this.state.bookId}`;
 
     return (
       <div className="app">
@@ -75,7 +66,6 @@ class BooksApp extends Component {
               wantToRead={this.state.wantToRead}
               read={this.state.read}
               updateRemoteShelves={this.updateRemoteShelves}
-              // getBookId={this.getBookId}
               handleData={this.handleData}
             />
           )}
@@ -85,7 +75,6 @@ class BooksApp extends Component {
           render={() => (
             <SearchBooks
               updateRemoteShelves={this.updateRemoteShelves}
-              // getBookId={this.getBookId}
               handleData={this.handleData}
             />
           )}
@@ -98,7 +87,6 @@ class BooksApp extends Component {
               onUpdateRemoteShelves={(book, shelf) =>
                 this.updateRemoteShelves(book, shelf)
               }
-              // bookId={bookId}
               handleData={this.handleData}
             />
           )}

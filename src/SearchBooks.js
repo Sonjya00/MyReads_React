@@ -155,18 +155,25 @@ class SearchBooks extends Component {
       ]
     };
     const keywordSection = keywords =>
-      keywords.map(keyword => (
-        <div class="keywords-section">
+      keywords.map((keyword, index) => (
+        <div key={index} className="keywords-group">
           <button className="keyword-btn">{keyword}</button>
         </div>
       ));
     return (
       <div className="search-books">
-        <div className="search-books-bar">
-          <Link to="/" className="close-search">
-            Close
+        <div className="search-books__bar">
+          <Link to="/" className="icon__back-arrow">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 18 18"
+            >
+              <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z" />
+            </svg>
           </Link>
-          <div className="search-books-input-wrapper">
+          <div className="search-books__input-wrapper">
             {/*
                 NOTES: The search from BooksAPI is limited to a particular set of search terms.
                 You can find these search terms here:
@@ -183,16 +190,16 @@ class SearchBooks extends Component {
             />
           </div>
         </div>
-        <div className="search-books-results">
+        <div className="search-books__main">
           {showingBooks.length > 0 && (
-            <div className="query-result">
+            <div className="query-result--g">
               <p>Showing {showingBooks.length} results - </p>
               <button className="reset-query-btn" onClick={this.clearQuery}>
                 Reset search
               </button>
             </div>
           )}
-          <ol className="books-grid">
+          <ol className="books-grid--g">
             {/* BEGINNING OF CONDITIONAL RENDERING, 4 OPTIONS */}
             {showingBooks.length > 0 ? (
               // If there are books that match the query, show the books
@@ -219,7 +226,10 @@ class SearchBooks extends Component {
             ) : this.state.query === "" ? (
               // If there are no matching results, check if the query is empty.
               // If it is, show initial screen with suggested keywords
-              <div className="keywords-screen" onClick={this.selectKeyword}>
+              <div
+                className="search-books__keywords-screen"
+                onClick={this.selectKeyword}
+              >
                 <h2>Suggested Keywords</h2>
                 <h3>Authors</h3>
                 {keywordSection(keywords.authors)}
@@ -240,12 +250,12 @@ class SearchBooks extends Component {
               // If there are no matching books, but there is a query,
               // see if it's still loading.
               // If it's still loading, show loading message
-              <div className="query-result">
+              <div className="query-result--g">
                 <p>Loading results... </p>
               </div>
             ) : (
               // If it isn't, show no results screen
-              <div className="query-result">
+              <div className="query-result--g">
                 <p>No results found - </p>
                 <button className="reset-query-btn" onClick={this.clearQuery}>
                   Reset search

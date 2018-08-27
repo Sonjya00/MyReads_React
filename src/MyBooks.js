@@ -14,18 +14,18 @@ class MyBooks extends Component {
     } = this.props;
     return (
       <div className="list-books">
-        <div className="list-books-title">
+        <div className="list-books__title">
           <h1>MyReads</h1>
         </div>
-        <div className="list-books-content">
+        <div className="list-books__content">
           <div>
             {/* CURRENTLY READING BOOKS */}
             <div className="bookshelf">
-              <h2 className="bookshelf-title">
+              <h2 className="bookshelf__title">
                 Currently Reading ({currentlyReading.length})
               </h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
+              <div className="bookshelf__books">
+                <ol className="books-grid--g">
                   {currentlyReading.map(book => {
                     const { id, shelf, imageLinks, title, authors } = book;
                     return (
@@ -52,11 +52,11 @@ class MyBooks extends Component {
             </div>
             {/* WANT TO READ BOOKS */}
             <div className="bookshelf">
-              <h2 className="bookshelf-title">
+              <h2 className="bookshelf__title">
                 Want to Read ({wantToRead.length})
               </h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
+              <div className="bookshelf__books">
+                <ol className="books-grid--g">
                   {wantToRead.map(book => {
                     const { id, shelf, imageLinks, title, authors } = book;
                     return (
@@ -80,9 +80,9 @@ class MyBooks extends Component {
             </div>
             {/* READ BOOKS */}
             <div className="bookshelf">
-              <h2 className="bookshelf-title">Read ({read.length})</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
+              <h2 className="bookshelf__title">Read ({read.length})</h2>
+              <div className="bookshelf__books">
+                <ol className="books-grid--g">
                   {read.map(book => {
                     const { id, shelf, imageLinks, title, authors } = book;
                     return (

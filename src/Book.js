@@ -31,8 +31,10 @@ class Book extends Component {
               height: 188,
               backgroundImage: `url(${img})`
             }}
-          />
-          <div className="book-shelf-changer">
+          >
+            {!img && <span class="book-cover--alt">Image not available</span>}
+          </div>
+          <div className="book-shelf-changer--g">
             <select id={id} value={shelf} onChange={this.handleChangeShelf}>
               <option value="move" disabled>
                 Move to...

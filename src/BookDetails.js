@@ -51,20 +51,20 @@ class BookDetails extends Component {
         return (
           <li>
             <span className="book-details--strong">{title}: </span>
-            {handleData(info)}
+            <span className="">{handleData(info)}</span>
           </li>
         );
       }
     };
     return (
       <div className="book-details__container">
-        <div className="list-books-title">
+        <div className="list-books__title">
           <h1>MyReads</h1>
         </div>
         {/* https://www.materialui.co/icon/clear */}
-        <Link to="/" className="close-bookdetails">
+        <Link to="/">
           <svg
-            className="close-book-details"
+            className="icon__close"
             xmlns="http://www.w3.org/2000/svg"
             width="40"
             height="40"
@@ -75,26 +75,26 @@ class BookDetails extends Component {
         </Link>
 
         {this.state.loading === true ? (
-          <div className="book-details__book">
+          <div className="book-details__main">
             <div className="book-details__title">
-              <div className="query-result">
+              <div className="query-result--g">
                 <p>Loading Book Info... </p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="book-details__book">
+          <div className="book-details__main">
             <div className="book-details__title">
-              <h2>{title}</h2>
+              <h2 className="heading--secondary">{title}</h2>
               {authors && (
                 <p className="book-details__author">By {handleData(authors)}</p>
               )}
             </div>
-            <div className="book-details__top">
-              <div className="book-details__top--left">
-                <div className="book-details--book-cover">
+            <div className="book-details__body">
+              <div className="book-details__section-1">
+                <div className="book-details__book-cover">
                   <div
-                    className="book-details--book-cover--img"
+                    className="book-details__book-cover--img"
                     style={{
                       width: 192,
                       height: 282,
@@ -102,8 +102,13 @@ class BookDetails extends Component {
                         imageLinks ? imageLinks.thumbnail : ""
                       })`
                     }}
-                  />
-                  <div className="book-shelf-changer">
+                  >
+                    {" "}
+                    {!imageLinks && (
+                      <span class="book-cover--alt">Image not available</span>
+                    )}
+                  </div>
+                  <div className="book-shelf-changer--g">
                     <select
                       id={id}
                       value={shelf}
@@ -123,42 +128,49 @@ class BookDetails extends Component {
                 </div>
               </div>
 
-              <div className="book-details__top--right">
-                {shelf === "currentlyReading" ? (
-                  <span className="shelf-tag shelf-reading">Now Reading</span>
-                ) : shelf === "wantToRead" ? (
-                  <span className="shelf-tag shelf-want-to-read">
-                    Want to read
-                  </span>
-                ) : shelf === "read" ? (
-                  <span className="shelf-tag shelf-read">Already Read</span>
-                ) : (
-                  <span className="shelf-tag shelf-none">Read</span>
-                )}
-                <ul className="book-details--info">
-                  {bookInfoLi(categories, "Category")}
-                  {bookInfoLi(language, "Language")}
-                  {bookInfoLi(pageCount, "Pages")}
-                  {bookInfoLi(publisher, "Publisher")}
-                  {bookInfoLi(publishedDate, "Date of publication")}
-                </ul>
-                <a
-                  href={canonicalVolumeLink}
-                  target="_blank"
-                  className="link book-details--weblink"
-                >
-                  Find on the web
-                </a>
+              <div className="book-details__section-2">
+                <div className="book-details__info">
+                  <h3 className="book-details__info--title heading--tertiary">
+                    Book Details
+                  </h3>
+                  {shelf === "currentlyReading" ? (
+                    <span className="shelf-tag shelf-reading">Now reading</span>
+                  ) : shelf === "wantToRead" ? (
+                    <span className="shelf-tag shelf-want-to-read">
+                      Want to read
+                    </span>
+                  ) : shelf === "read" ? (
+                    <span className="shelf-tag shelf-read">Already read</span>
+                  ) : (
+                    <span className="shelf-tag shelf-none">Not on shelf</span>
+                  )}
+                  <ul className="book-details__info--list">
+                    {bookInfoLi(categories, "Category")}
+                    {bookInfoLi(language, "Language")}
+                    {bookInfoLi(pageCount, "Pages")}
+                    {bookInfoLi(publisher, "Publisher")}
+                    {bookInfoLi(publishedDate, "Publication Date")}
+                  </ul>
+                  <a
+                    href={canonicalVolumeLink}
+                    target="_blank"
+                    className="link book-details--weblink"
+                  >
+                    Find on the web
+                  </a>
+                </div>
               </div>
+              {description && (
+                <div className="book-details__section-3">
+                  <h3 className="book-details__overview--title heading--tertiary">
+                    Overview
+                  </h3>
+                  <p className="book-details__overview--description">
+                    {description}
+                  </p>
+                </div>
+              )}
             </div>
-            {description && (
-              <div className="book-details__overview">
-                <h3 className="book-details__overview__title">Overview</h3>
-                <p className="book-details__overview__description">
-                  {description}
-                </p>
-              </div>
-            )}
           </div>
         )}
       </div>
