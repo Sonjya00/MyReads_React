@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import * as BooksAPI from "./BooksAPI";
 
 class BookDetails extends Component {
@@ -64,7 +65,6 @@ class BookDetails extends Component {
         <div className="list-books__title">
           <h1>MyReads</h1>
         </div>
-        {/* https://www.materialui.co/icon/clear */}
         <Link to="/" aria-label="Back to homepage">
           <svg
             className="icon__close"
@@ -203,5 +203,10 @@ class BookDetails extends Component {
     );
   }
 }
+
+BookDetails.propTypes = {
+  updateRemoteShelves: PropTypes.func,
+  handleData: PropTypes.func
+};
 
 export default BookDetails;

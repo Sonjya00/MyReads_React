@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import * as BooksAPI from "./BooksAPI";
 
 class Book extends Component {
@@ -77,4 +78,14 @@ class Book extends Component {
     );
   }
 }
+
+Book.propTypes = {
+  id: PropTypes.string,
+  img: PropTypes.string,
+  title: PropTypes.string,
+  authors: PropTypes.array,
+  onUpdateRemoteShelves: PropTypes.func,
+  handleData: PropTypes.func
+};
+
 export default Book;

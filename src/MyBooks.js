@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import Book from "./Book";
 
 class MyBooks extends Component {
@@ -54,12 +55,11 @@ class MyBooks extends Component {
                   </button>
                   <ol className="books-grid--g">
                     {currentlyReading.map(book => {
-                      const { id, shelf, imageLinks, title, authors } = book;
+                      const { id, imageLinks, title, authors } = book;
                       return (
                         <Book
                           key={id}
                           id={id}
-                          shelf={shelf}
                           img={imageLinks ? imageLinks.smallThumbnail : ""}
                           title={title}
                           authors={authors}
@@ -93,12 +93,11 @@ class MyBooks extends Component {
                   </button>
                   <ol className="books-grid--g">
                     {wantToRead.map(book => {
-                      const { id, shelf, imageLinks, title, authors } = book;
+                      const { id, imageLinks, title, authors } = book;
                       return (
                         <Book
                           key={id}
                           id={id}
-                          shelf={shelf}
                           img={imageLinks ? imageLinks.smallThumbnail : ""}
                           title={title}
                           authors={authors}
@@ -132,12 +131,11 @@ class MyBooks extends Component {
                   </button>
                   <ol className="books-grid--g">
                     {read.map(book => {
-                      const { id, shelf, imageLinks, title, authors } = book;
+                      const { id, imageLinks, title, authors } = book;
                       return (
                         <Book
                           key={id}
                           id={id}
-                          shelf={shelf}
                           img={imageLinks ? imageLinks.smallThumbnail : ""}
                           title={title}
                           authors={authors}
@@ -163,5 +161,14 @@ class MyBooks extends Component {
     );
   }
 }
+
+MyBooks.propTypes = {
+  currentlyReading: PropTypes.array,
+  wantToRead: PropTypes.array,
+  read: PropTypes.array,
+  loadingShelves: PropTypes.bool,
+  updateRemoteShelves: PropTypes.func,
+  handleData: PropTypes.func
+};
 
 export default MyBooks;
