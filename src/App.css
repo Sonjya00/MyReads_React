@@ -35,10 +35,11 @@ body,
   fill: black;
 }
 
-/* main page */
+/* main heading styles */
 
 .list-books__title {
-  background: linear-gradient(to left, #06a9d6, #0678d6);
+  /* background: linear-gradient(to left, #06a9d6, #0678d6); */
+  background: linear-gradient(to left, #0b9e72, #0678d6);
   letter-spacing: 5px;
   padding: 10px 0;
   text-align: center;
@@ -48,6 +49,22 @@ body,
   font-weight: 400;
   margin: 0;
 }
+
+/* headings style */
+
+.heading--secondary {
+  color: #03457a;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.heading--tertiary {
+  color: #03457a;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+/* main page */
 
 .list-books__content {
   flex: 1;
@@ -94,6 +111,15 @@ body,
   background-color: #00447c;
 }
 
+.no-books-message {
+  color: #555;
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 80px;
+  text-align: center;
+  word-spacing: 2px;
+}
+
 /* search page */
 
 .search-books__bar {
@@ -126,14 +152,6 @@ body,
   width: 80%;
 }
 
-.search-books__keywords-screen h3 {
-  color: #d60656;
-}
-
-.search-books__keywords-screen span {
-  color: #06a9d6;
-}
-
 .query-result--g {
   font-size: 16px;
   text-align: center;
@@ -143,6 +161,7 @@ body,
 .reset-query-btn,
 .keywords-group {
   display: inline-block;
+  margin: 15px auto 20px;
 }
 
 .reset-query-btn,
@@ -151,16 +170,20 @@ body,
   background-color: transparent;
   font-family: "Raleway", sans-serif;
   border: none;
-  border-bottom: 1px solid #06a9d6;
-  color: #06a9d6;
+  color: #0b9e72;
   cursor: pointer;
   margin-right: 5px;
+  text-decoration: underline;
 }
 
 .reset-query-btn:hover,
 .keyword-btn:hover {
   color: #d60656;
-  border-bottom: 1px solid #d60656;
+}
+
+.reset-query-btn:active,
+.keyword-btn:active {
+  color: #dd9907;
 }
 
 /* books grid */
@@ -219,12 +242,14 @@ body,
   background-position: center;
   background-size: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border: 2px solid #fff;
   border-radius: 50%;
   position: absolute;
   right: 0;
   bottom: -10px;
   width: 40px;
   height: 40px;
+  z-index: 5;
 }
 .book-shelf-changer--g select {
   cursor: pointer;
@@ -233,22 +258,10 @@ body,
   height: 100%;
 }
 .book-shelf-changer--g:hover {
-  background-color: #0678d6;
+  background-color: #00447c;
 }
 
 /* single book page */
-
-.heading--secondary {
-  color: #03457a;
-  font-size: 26px;
-  letter-spacing: 2px;
-}
-
-.heading--tertiary {
-  color: #03457a;
-  font-size: 22px;
-  letter-spacing: 2px;
-}
 
 .book-details__author {
   color: #999;
@@ -261,8 +274,8 @@ body,
 }
 
 .link {
-  border-bottom: 1px solid #029faa;
-  color: #029faa;
+  border-bottom: 1px solid #0b9e72;
+  color: #0b9e72;
   font-weight: bold;
   text-decoration: none;
 }
@@ -278,27 +291,34 @@ body,
 }
 
 .shelf-tag {
-  color: white;
+  color: #fff;
+  border: 2px solid #fff;
   display: block;
   font-size: 14px;
-  margin: 0 auto;
+  line-height: 25px;
+  position: absolute;
+  bottom: 15px;
   padding: 2px;
-  text-align: center;
   text-transform: uppercase;
   transition: all 0.7s;
-  width: 130px;
+  width: 100%;
+}
+
+.shelf-tag span {
+  letter-spacing: 1px;
+  margin-left: 5px;
 }
 
 .shelf-reading {
-  background-color: #50bb13;
+  background-color: #01b610;
 }
 
 .shelf-want-to-read {
-  background-color: #e64124;
+  background-color: #e00736;
 }
 
 .shelf-read {
-  background-color: #06a9d6;
+  background-color: #3508fc;
 }
 
 .shelf-none {
@@ -370,6 +390,7 @@ body,
 
 .book-details__info--list {
   display: block;
+  font-size: 16px;
   line-height: 30px;
   list-style-type: none;
   padding-left: 0;
@@ -380,6 +401,7 @@ body,
 }
 
 .book-details__overview--description {
+  font-size: 16px;
   line-height: 30px;
   margin: 0 8% 30px;
   text-align: justify;
@@ -396,13 +418,15 @@ body,
     text-align: justify;
   }
   .book-details__info--title,
-  .shelf-tag,
   .book-details--weblink {
     text-align: center;
   }
 }
 
 @media screen and (min-width: 600px) {
+  .book-details__title {
+    max-width: 700px;
+  }
   .book-details__section-1,
   .book-details__section-2 {
     width: 50%;

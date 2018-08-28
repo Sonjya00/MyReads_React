@@ -203,13 +203,15 @@ class SearchBooks extends Component {
             {/* BEGINNING OF CONDITIONAL RENDERING, 4 OPTIONS */}
             {showingBooks.length > 0 ? (
               // If there are books that match the query, show the books
+              // NOTE: this book has different props than the book components in MyBook,
+              // do not sync
               showingBooks.map(book => {
-                const { id, shelf, imageLinks, title, authors } = book;
+                console.log(book);
+                const { id, imageLinks, title, authors } = book;
                 return (
                   <Book
                     key={id}
                     id={id}
-                    shelf={shelf}
                     img={imageLinks ? imageLinks.smallThumbnail : ""}
                     title={title}
                     authors={authors}
@@ -227,20 +229,20 @@ class SearchBooks extends Component {
                 className="search-books__keywords-screen"
                 onClick={this.selectKeyword}
               >
-                <h2>Suggested Keywords</h2>
-                <h3>Authors</h3>
+                <h2 className="heading--secondary">Suggested Keywords</h2>
+                <h3 className="heading--tertiary">Authors</h3>
                 {keywordSection(keywords.authors)}
-                <h3>Genre</h3>
+                <h3 className="heading--tertiary">Genre</h3>
                 {keywordSection(keywords.genre)}
-                <h3>Technology</h3>
+                <h3 className="heading--tertiary">Technology</h3>
                 {keywordSection(keywords.technology)}
-                <h3>Economy</h3>
+                <h3 className="heading--tertiary">Economy</h3>
                 {keywordSection(keywords.economy)}
-                <h3>Sport</h3>
+                <h3 className="heading--tertiary">Sport</h3>
                 {keywordSection(keywords.sport)}
-                <h3>Skills, Art & Hobbies</h3>
+                <h3 className="heading--tertiary">Skills, Art & Hobbies</h3>
                 {keywordSection(keywords.art)}
-                <h3>Miscellaneous</h3>
+                <h3 className="heading--tertiary">Miscellaneous</h3>
                 {keywordSection(keywords.misc)}
               </div>
             ) : this.state.loading === true ? (

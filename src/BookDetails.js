@@ -33,6 +33,7 @@ class BookDetails extends Component {
   render() {
     const {
       authors,
+      averageRating,
       canonicalVolumeLink,
       categories,
       description,
@@ -42,6 +43,8 @@ class BookDetails extends Component {
       pageCount,
       publishedDate,
       publisher,
+      ratingCount,
+      subtitle,
       title
     } = this.state.book;
     const { shelf } = this.state;
@@ -85,7 +88,10 @@ class BookDetails extends Component {
         ) : (
           <div className="book-details__main">
             <div className="book-details__title">
-              <h2 className="heading--secondary">{title}</h2>
+              <h2 className="heading--secondary">
+                {title} {subtitle && <span>: {handleData(subtitle)}</span>}
+              </h2>
+
               {authors && (
                 <p className="book-details__author">By {handleData(authors)}</p>
               )}
@@ -127,25 +133,32 @@ class BookDetails extends Component {
                       <option value="none">None</option>
                     </select>
                   </div>
+                  {shelf === "currentlyReading" ? (
+                    <div className="shelf-tag shelf-reading">
+                      <span>Now reading</span>
+                    </div>
+                  ) : shelf === "wantToRead" ? (
+                    <div className="shelf-tag shelf-want-to-read">
+                      <span>Want to read</span>
+                    </div>
+                  ) : shelf === "read" ? (
+                    <div className="shelf-tag shelf-read">
+                      <span>Already read</span>
+                    </div>
+                  ) : (
+                    <div className="shelf-tag shelf-none">
+                      <span>Not on shelf</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
               <div className="book-details__section-2">
                 <div className="book-details__info">
                   <h3 className="book-details__info--title heading--tertiary">
-                    Book Details
+                    Details about this book
                   </h3>
-                  {shelf === "currentlyReading" ? (
-                    <span className="shelf-tag shelf-reading">Now reading</span>
-                  ) : shelf === "wantToRead" ? (
-                    <span className="shelf-tag shelf-want-to-read">
-                      Want to read
-                    </span>
-                  ) : shelf === "read" ? (
-                    <span className="shelf-tag shelf-read">Already read</span>
-                  ) : (
-                    <span className="shelf-tag shelf-none">Not on shelf</span>
-                  )}
+                  {/* original position for the shelf tag */}
                   <ul className="book-details__info--list">
                     {bookInfoLi(categories, "Category")}
                     {bookInfoLi(language, "Language")}
