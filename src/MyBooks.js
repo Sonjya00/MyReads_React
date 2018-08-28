@@ -10,6 +10,7 @@ class MyBooks extends Component {
       currentlyReading,
       wantToRead,
       read,
+      loadingShelves,
       updateRemoteShelves,
       handleData
     } = this.props;
@@ -25,7 +26,11 @@ class MyBooks extends Component {
               <h2 className="bookshelf__title heading--secondary">
                 Currently Reading ({currentlyReading.length})
               </h2>
-              {currentlyReading.length === 0 ? (
+              {loadingShelves === true ? (
+                <div className="query-result--g">
+                  <p>Loading books on this shelf... </p>
+                </div>
+              ) : currentlyReading.length === 0 ? (
                 <p class="no-books-message">
                   There are no books on this shelf. Add some from the{" "}
                   <Link className="link" to="/search">
@@ -35,7 +40,7 @@ class MyBooks extends Component {
               ) : (
                 <div className="bookshelf__books">
                   <button
-                    className="reset-query-btn"
+                    className="reset-shelf-btn"
                     onClick={() => this.clearShelf(currentlyReading)}
                   >
                     Clear this shelf
@@ -67,7 +72,11 @@ class MyBooks extends Component {
               <h2 className="bookshelf__title heading--secondary">
                 Want to Read ({wantToRead.length})
               </h2>
-              {wantToRead.length === 0 ? (
+              {loadingShelves === true ? (
+                <div className="query-result--g">
+                  <p>Loading books on this shelf... </p>
+                </div>
+              ) : wantToRead.length === 0 ? (
                 <p class="no-books-message">
                   There are no books on this shelf. Add some from the{" "}
                   <Link className="link" to="/search">
@@ -77,7 +86,7 @@ class MyBooks extends Component {
               ) : (
                 <div className="bookshelf__books">
                   <button
-                    className="reset-query-btn"
+                    className="reset-shelf-btn"
                     onClick={() => this.clearShelf(currentlyReading)}
                   >
                     Clear this shelf
@@ -109,7 +118,11 @@ class MyBooks extends Component {
               <h2 className="bookshelf__title heading--secondary">
                 Read ({read.length})
               </h2>
-              {read.length === 0 ? (
+              {loadingShelves === true ? (
+                <div className="query-result--g">
+                  <p>Loading books on this shelf... </p>
+                </div>
+              ) : read.length === 0 ? (
                 <p class="no-books-message">
                   There are no books on this shelf. Add some from the{" "}
                   <Link className="link" to="/search">
@@ -119,7 +132,7 @@ class MyBooks extends Component {
               ) : (
                 <div className="bookshelf__books">
                   <button
-                    className="reset-query-btn"
+                    className="reset-shelf-btn"
                     onClick={() => this.clearShelf(currentlyReading)}
                   >
                     Clear this shelf

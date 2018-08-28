@@ -152,18 +152,23 @@ body,
   width: 80%;
 }
 
+.reset-shelf-btn {
+  margin: 15px auto 20px;
+}
+
 .query-result--g {
   font-size: 16px;
   text-align: center;
 }
 
-.query-result--g p,
+.reset-shelf-btn,
 .reset-query-btn,
+.query-result--g p,
 .keywords-group {
   display: inline-block;
-  margin: 15px auto 20px;
 }
 
+.reset-shelf-btn,
 .reset-query-btn,
 .keyword-btn {
   font-size: 16px;
@@ -175,12 +180,12 @@ body,
   margin-right: 5px;
   text-decoration: underline;
 }
-
+.reset-shelf-btn:hover,
 .reset-query-btn:hover,
 .keyword-btn:hover {
   color: #d60656;
 }
-
+.reset-shelf-btn:active,
 .reset-query-btn:active,
 .keyword-btn:active {
   color: #dd9907;

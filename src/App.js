@@ -11,7 +11,8 @@ class BooksApp extends Component {
   state = {
     currentlyReading: [],
     wantToRead: [],
-    read: []
+    read: [],
+    loadingShelves: true
   };
 
   // Get initial state (book array and 3 shelves arrays)
@@ -26,7 +27,8 @@ class BooksApp extends Component {
     this.setState({
       currentlyReading: books.filter(book => book.shelf === "currentlyReading"),
       wantToRead: books.filter(book => book.shelf === "wantToRead"),
-      read: books.filter(book => book.shelf === "read")
+      read: books.filter(book => book.shelf === "read"),
+      loadingShelves: false
     });
   }
 
@@ -64,6 +66,7 @@ class BooksApp extends Component {
               currentlyReading={this.state.currentlyReading}
               wantToRead={this.state.wantToRead}
               read={this.state.read}
+              loadingShelves={this.state.loadingShelves}
               updateRemoteShelves={this.updateRemoteShelves}
               handleData={this.handleData}
             />
