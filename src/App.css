@@ -112,7 +112,7 @@ body,
 }
 
 .no-books-message {
-  color: #555;
+  color: #666;
   font-size: 18px;
   font-style: italic;
   margin-top: 80px;
@@ -129,7 +129,7 @@ body,
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 5;
+  z-index: 10;
 }
 .search-books__input-wrapper {
   background: #e9e;
@@ -149,7 +149,8 @@ body,
 
 .search-books__keywords-screen {
   text-align: center;
-  width: 80%;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .reset-shelf-btn {
@@ -175,7 +176,7 @@ body,
   background-color: transparent;
   font-family: "Raleway", sans-serif;
   border: none;
-  color: #0b9e72;
+  color: rgb(1, 133, 93);
   cursor: pointer;
   margin-right: 5px;
   text-decoration: underline;
@@ -218,7 +219,7 @@ body,
   margin-top: 10px;
 }
 .book-authors {
-  color: #999;
+  color: #666;
 }
 
 .book-top {
@@ -269,7 +270,7 @@ body,
 /* single book page */
 
 .book-details__author {
-  color: #999;
+  color: #666;
 }
 
 .book-details--strong {
@@ -279,8 +280,8 @@ body,
 }
 
 .link {
-  border-bottom: 1px solid #0b9e72;
-  color: #0b9e72;
+  border-bottom: 1px solid rgb(1, 133, 93);
+  color: rgb(1, 133, 93);
   font-weight: bold;
   text-decoration: none;
 }

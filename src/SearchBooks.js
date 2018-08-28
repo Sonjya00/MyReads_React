@@ -89,9 +89,8 @@ class SearchBooks extends Component {
         "Comics",
         "Drama",
         "Fantasy",
-        "Fiction",
         "Horror",
-        "Literary",
+        "Literary Fiction",
         "Mystery",
         "Philosophy",
         "Poetry",
@@ -163,7 +162,12 @@ class SearchBooks extends Component {
     return (
       <div className="search-books">
         <div className="search-books__bar">
-          <Link to="/" className="icon__back-arrow">
+          <Link
+            to="/"
+            className="icon__back-arrow"
+            role="button"
+            aria-label="Back to homepage"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="40"
@@ -183,9 +187,11 @@ class SearchBooks extends Component {
                 you don't find a specific author or title. Every search is limited by search terms.
               */}
             <input
+              id="searchBar"
               type="text"
               placeholder="Search by title or author"
               value={query}
+              aria-label="Search"
               onChange={event => this.updateQuery(event.target.value)}
             />
           </div>
@@ -199,14 +205,14 @@ class SearchBooks extends Component {
               </button>
             </div>
           )}
-          <ol className="books-grid--g">
-            {/* BEGINNING OF CONDITIONAL RENDERING, 4 OPTIONS */}
-            {showingBooks.length > 0 ? (
-              // If there are books that match the query, show the books
+
+          {/* BEGINNING OF CONDITIONAL RENDERING, 4 OPTIONS */}
+          {showingBooks.length > 0 ? (
+            <ol className="books-grid--g">
+              {/* // If there are books that match the query, show the books
               // NOTE: this book has different props than the book components in MyBook,
-              // do not sync
-              showingBooks.map(book => {
-                console.log(book);
+              // do not sync */}
+              {showingBooks.map(book => {
                 const { id, imageLinks, title, authors } = book;
                 return (
                   <Book
@@ -221,47 +227,47 @@ class SearchBooks extends Component {
                     handleData={handleData}
                   />
                 );
-              })
-            ) : this.state.query === "" ? (
-              // If there are no matching results, check if the query is empty.
-              // If it is, show initial screen with suggested keywords
-              <div
-                className="search-books__keywords-screen"
-                onClick={this.selectKeyword}
-              >
-                <h2 className="heading--secondary">Suggested Keywords</h2>
-                <h3 className="heading--tertiary">Authors</h3>
-                {keywordSection(keywords.authors)}
-                <h3 className="heading--tertiary">Genre</h3>
-                {keywordSection(keywords.genre)}
-                <h3 className="heading--tertiary">Technology</h3>
-                {keywordSection(keywords.technology)}
-                <h3 className="heading--tertiary">Economy</h3>
-                {keywordSection(keywords.economy)}
-                <h3 className="heading--tertiary">Sport</h3>
-                {keywordSection(keywords.sport)}
-                <h3 className="heading--tertiary">Skills, Art & Hobbies</h3>
-                {keywordSection(keywords.art)}
-                <h3 className="heading--tertiary">Miscellaneous</h3>
-                {keywordSection(keywords.misc)}
-              </div>
-            ) : this.state.loading === true ? (
-              // If there are no matching books, but there is a query,
-              // see if it's still loading.
-              // If it's still loading, show loading message
-              <div className="query-result--g">
-                <p>Loading results... </p>
-              </div>
-            ) : (
-              // If it isn't, show no results screen
-              <div className="query-result--g">
-                <p>No results found - </p>
-                <button className="reset-query-btn" onClick={this.clearQuery}>
-                  Reset search
-                </button>
-              </div>
-            )}
-          </ol>
+              })}
+            </ol>
+          ) : this.state.query === "" ? (
+            // If there are no matching results, check if the query is empty.
+            // If it is, show initial screen with suggested keywords
+            <div
+              className="search-books__keywords-screen"
+              onClick={this.selectKeyword}
+            >
+              <h2 className="heading--secondary">Suggested Keywords</h2>
+              <h3 className="heading--tertiary">Authors</h3>
+              {keywordSection(keywords.authors)}
+              <h3 className="heading--tertiary">Genre</h3>
+              {keywordSection(keywords.genre)}
+              <h3 className="heading--tertiary">Technology</h3>
+              {keywordSection(keywords.technology)}
+              <h3 className="heading--tertiary">Economy</h3>
+              {keywordSection(keywords.economy)}
+              <h3 className="heading--tertiary">Sport</h3>
+              {keywordSection(keywords.sport)}
+              <h3 className="heading--tertiary">Skills, Art & Hobbies</h3>
+              {keywordSection(keywords.art)}
+              <h3 className="heading--tertiary">Miscellaneous</h3>
+              {keywordSection(keywords.misc)}
+            </div>
+          ) : this.state.loading === true ? (
+            // If there are no matching books, but there is a query,
+            // see if it's still loading.
+            // If it's still loading, show loading message
+            <div className="query-result--g">
+              <p>Loading results... </p>
+            </div>
+          ) : (
+            // If it isn't, show no results screen
+            <div className="query-result--g">
+              <p>No results found - </p>
+              <button className="reset-query-btn" onClick={this.clearQuery}>
+                Reset search
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );

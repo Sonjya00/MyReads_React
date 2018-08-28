@@ -51,7 +51,12 @@ class Book extends Component {
             )}
           </div>
           <div className="book-shelf-changer--g">
-            <select id={id} value={shelf} onChange={this.handleChangeShelf}>
+            <select
+              id={id}
+              value={shelf}
+              onChange={this.handleChangeShelf}
+              aria-label="Select shelf"
+            >
               <option value="move" disabled>
                 Move to...
               </option>

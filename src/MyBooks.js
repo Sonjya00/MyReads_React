@@ -14,6 +14,20 @@ class MyBooks extends Component {
       updateRemoteShelves,
       handleData
     } = this.props;
+
+    const LoadingMessage = (
+      <div className="query-result--g">
+        <p>Loading books on this shelf... </p>
+      </div>
+    );
+    const NoBooksMessages = (
+      <p className="no-books-message">
+        There are no books on this shelf. Add some from the{" "}
+        <Link className="link" to="/search">
+          Search Page
+        </Link>
+      </p>
+    );
     return (
       <div className="list-books">
         <div className="list-books__title">
@@ -27,16 +41,9 @@ class MyBooks extends Component {
                 Currently Reading ({currentlyReading.length})
               </h2>
               {loadingShelves === true ? (
-                <div className="query-result--g">
-                  <p>Loading books on this shelf... </p>
-                </div>
+                LoadingMessage
               ) : currentlyReading.length === 0 ? (
-                <p class="no-books-message">
-                  There are no books on this shelf. Add some from the{" "}
-                  <Link className="link" to="/search">
-                    Search Page
-                  </Link>
-                </p>
+                NoBooksMessages
               ) : (
                 <div className="bookshelf__books">
                   <button
@@ -73,21 +80,14 @@ class MyBooks extends Component {
                 Want to Read ({wantToRead.length})
               </h2>
               {loadingShelves === true ? (
-                <div className="query-result--g">
-                  <p>Loading books on this shelf... </p>
-                </div>
+                LoadingMessage
               ) : wantToRead.length === 0 ? (
-                <p class="no-books-message">
-                  There are no books on this shelf. Add some from the{" "}
-                  <Link className="link" to="/search">
-                    Search Page
-                  </Link>
-                </p>
+                NoBooksMessages
               ) : (
                 <div className="bookshelf__books">
                   <button
                     className="reset-shelf-btn"
-                    onClick={() => this.clearShelf(currentlyReading)}
+                    onClick={() => this.clearShelf(wantToRead)}
                   >
                     Clear this shelf
                   </button>
@@ -119,21 +119,14 @@ class MyBooks extends Component {
                 Read ({read.length})
               </h2>
               {loadingShelves === true ? (
-                <div className="query-result--g">
-                  <p>Loading books on this shelf... </p>
-                </div>
+                LoadingMessage
               ) : read.length === 0 ? (
-                <p class="no-books-message">
-                  There are no books on this shelf. Add some from the{" "}
-                  <Link className="link" to="/search">
-                    Search Page
-                  </Link>
-                </p>
+                NoBooksMessages
               ) : (
                 <div className="bookshelf__books">
                   <button
                     className="reset-shelf-btn"
-                    onClick={() => this.clearShelf(currentlyReading)}
+                    onClick={() => this.clearShelf(read)}
                   >
                     Clear this shelf
                   </button>
@@ -162,7 +155,9 @@ class MyBooks extends Component {
           </div>
         </div>
         <div className="open-search">
-          <Link to="/search">Add a book</Link>
+          <Link to="/search" role="button" aria-label="Add a book">
+            Add a book
+          </Link>
         </div>
       </div>
     );

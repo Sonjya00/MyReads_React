@@ -43,7 +43,7 @@ class BookDetails extends Component {
       pageCount,
       publishedDate,
       publisher,
-      ratingCount,
+      ratingsCount,
       subtitle,
       title
     } = this.state.book;
@@ -65,7 +65,7 @@ class BookDetails extends Component {
           <h1>MyReads</h1>
         </div>
         {/* https://www.materialui.co/icon/clear */}
-        <Link to="/">
+        <Link to="/" aria-label="Back to homepage">
           <svg
             className="icon__close"
             xmlns="http://www.w3.org/2000/svg"
@@ -120,6 +120,7 @@ class BookDetails extends Component {
                     <select
                       id={id}
                       value={shelf}
+                      aria-label="Select shelf"
                       onChange={this.handleChangeShelf}
                     >
                       <option value="move" disabled>
@@ -160,6 +161,16 @@ class BookDetails extends Component {
                   </h3>
                   {/* original position for the shelf tag */}
                   <ul className="book-details__info--list">
+                    <li>
+                      <span className="book-details--strong rating">
+                        Rating:{" "}
+                      </span>
+                      <span className="">
+                        {averageRating
+                          ? `${averageRating} (${ratingsCount} votes) `
+                          : `Not rated yet`}
+                      </span>
+                    </li>
                     {bookInfoLi(categories, "Category")}
                     {bookInfoLi(language, "Language")}
                     {bookInfoLi(pageCount, "Pages")}

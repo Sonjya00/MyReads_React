@@ -23,6 +23,7 @@ class BooksApp extends Component {
   }
 
   // Update books and shelves arrays in the state when a books shelf changes
+  // Set loadingShelves to false to display the books in each shelf
   updateStateShelf(books) {
     this.setState({
       currentlyReading: books.filter(book => book.shelf === "currentlyReading"),
@@ -52,6 +53,7 @@ class BooksApp extends Component {
   }
 
   render() {
+    const { currentlyReading, wantToRead, read, loadingShelves } = this.state;
     let bookDetailPath = `/details/${JSON.parse(
       localStorage.getItem("bookId")
     )}`;
@@ -63,10 +65,10 @@ class BooksApp extends Component {
           path="/"
           render={() => (
             <MyBooks
-              currentlyReading={this.state.currentlyReading}
-              wantToRead={this.state.wantToRead}
-              read={this.state.read}
-              loadingShelves={this.state.loadingShelves}
+              currentlyReading={currentlyReading}
+              wantToRead={wantToRead}
+              read={read}
+              loadingShelves={loadingShelves}
               updateRemoteShelves={this.updateRemoteShelves}
               handleData={this.handleData}
             />
