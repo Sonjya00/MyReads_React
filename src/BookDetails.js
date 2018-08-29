@@ -62,8 +62,10 @@ class BookDetails extends Component {
     };
     return (
       <div className="book-details__container">
-        <div className="list-books__title">
-          <h1>MyReads</h1>
+        <div className="list-books__top-bar">
+          <h1 className="list-books__title">
+            <Link to="/">MyReads</Link>
+          </h1>
         </div>
         <Link to="/" aria-label="Back to homepage">
           <svg
@@ -177,13 +179,15 @@ class BookDetails extends Component {
                     {bookInfoLi(publisher, "Publisher")}
                     {bookInfoLi(publishedDate, "Publication Date")}
                   </ul>
-                  <a
-                    href={canonicalVolumeLink}
-                    target="_blank"
-                    className="link book-details--weblink"
-                  >
-                    Find on the web
-                  </a>
+                  {canonicalVolumeLink && (
+                    <a
+                      href={canonicalVolumeLink}
+                      target="_blank"
+                      className="link book-details--weblink"
+                    >
+                      Find on the web
+                    </a>
+                  )}
                 </div>
               </div>
               {description && (

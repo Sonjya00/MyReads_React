@@ -28,7 +28,7 @@ From this page, as for any other page of this app, it is possible to change the 
 
 ### Search page
 
-To find more books, the user can click on the "+" button on the bottom right corner of the main page. Doing so will display a new page containing a search bar. It is possible to either type a query, or to select one of the keywords suggested below (which are the only ones that can be used to get some results). Either way, as soon as the search bar has some content, the books matching the results are displayed. By clicking on "Reset Search", it is possible to delete the content of the search bar and perform a new search.
+To find more books, the user can click on the "+" button on the bottom right corner of the main page. Doing so will display a new page containing a search bar. It is possible to either type a query, or to select one of the keywords suggested below (which are the only ones that can be used to get some results). Either way, as soon as the search bar has some content, the books matching the results are displayed. The maximum number of books that can be displayed is set to 20. By clicking on "Reset Search", it is possible to delete the content of the search bar and perform a new search.
 
 ![Search page](screenshots/Search_Page_1.jpg)
 ![Search page](screenshots/Search_Page_2.jpg)

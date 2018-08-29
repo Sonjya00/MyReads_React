@@ -37,17 +37,25 @@ body,
 
 /* main heading styles */
 
-.list-books__title {
-  /* background: linear-gradient(to left, #06a9d6, #0678d6); */
+.list-books__top-bar {
   background: linear-gradient(to left, #0b9e72, #0678d6);
   letter-spacing: 5px;
   padding: 10px 0;
   text-align: center;
 }
-.list-books__title h1 {
+.list-books__title {
+  margin: 0;
+}
+.list-books__title a {
   color: #fff;
   font-weight: 400;
-  margin: 0;
+  text-decoration: none;
+}
+.list-books__title a:hover {
+  color: #ffd477;
+}
+.list-books__title a:active {
+  color: #d60656;
 }
 
 /* headings style */
@@ -132,7 +140,7 @@ body,
   z-index: 10;
 }
 .search-books__input-wrapper {
-  background: #e9e;
+  /* background: #e9e; */
   flex: 1;
 }
 .search-books__bar input {
@@ -174,8 +182,8 @@ body,
 .keyword-btn {
   font-size: 16px;
   background-color: transparent;
-  font-family: "Raleway", sans-serif;
   border: none;
+  font-family: "Raleway", sans-serif;
   color: rgb(1, 133, 93);
   cursor: pointer;
   margin-right: 5px;
@@ -235,7 +243,7 @@ body,
 }
 
 .book-cover--alt {
-  color: #333;
+  color: #666;
   display: block;
   text-align: center;
   transform: translateY(100px);
@@ -263,6 +271,15 @@ body,
   width: 100%;
   height: 100%;
 }
+/* .book-shelf-changer--g select:focus {
+  background-color: transparent;
+  border: none;
+  border-radius: 50px;
+  color: transparent;
+  opacity: 0;
+  outline-offset: 5px;
+} */
+
 .book-shelf-changer--g:hover {
   background-color: #00447c;
 }
@@ -282,7 +299,7 @@ body,
 .link {
   border-bottom: 1px solid rgb(1, 133, 93);
   color: rgb(1, 133, 93);
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -309,24 +326,19 @@ body,
   transition: all 0.7s;
   width: 100%;
 }
-
 .shelf-tag span {
   letter-spacing: 1px;
   margin-left: 5px;
 }
-
 .shelf-reading {
   background-color: #01b610;
 }
-
 .shelf-want-to-read {
   background-color: #e00736;
 }
-
 .shelf-read {
   background-color: #3508fc;
 }
-
 .shelf-none {
   background-color: #999;
 }
@@ -369,8 +381,8 @@ body,
 }
 
 .book-details__book-cover {
-  position: relative;
   margin: 0 auto;
+  position: relative;
   width: 192px;
   height: 282px;
 }

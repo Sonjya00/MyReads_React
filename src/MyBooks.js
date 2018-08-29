@@ -31,8 +31,10 @@ class MyBooks extends Component {
     );
     return (
       <div className="list-books">
-        <div className="list-books__title">
-          <h1>MyReads</h1>
+        <div className="list-books__top-bar">
+          <h1 className="list-books__title">
+            <Link to="/">MyReads</Link>
+          </h1>
         </div>
         <div className="list-books__content">
           <div>

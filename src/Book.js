@@ -20,6 +20,9 @@ class Book extends Component {
   // When the book changes shelf,
   // call onUpdateRemoteShelves on either MyBooks or SearchBooks and send the new data
   handleChangeShelf = event => {
+    this.setState({
+      shelf: event.target.value
+    });
     this.props.onUpdateRemoteShelves(this.props, event.target.value);
   };
 
