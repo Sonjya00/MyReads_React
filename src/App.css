@@ -184,15 +184,25 @@ body,
   background-color: transparent;
   border: none;
   font-family: "Raleway", sans-serif;
-  color: rgb(1, 133, 93);
   cursor: pointer;
   margin-right: 5px;
   text-decoration: underline;
 }
-.reset-shelf-btn:hover,
+
+.reset-query-btn,
+.keyword-btn {
+  color: rgb(1, 133, 93);
+}
+.reset-shelf-btn {
+  color: #d60656;
+  font-weight: 600;
+}
 .reset-query-btn:hover,
 .keyword-btn:hover {
   color: #d60656;
+}
+.reset-shelf-btn:hover {
+  color: #3508fc;
 }
 .reset-shelf-btn:active,
 .reset-query-btn:active,
@@ -331,13 +341,13 @@ body,
   margin-left: 5px;
 }
 .shelf-reading {
-  background-color: #01b610;
+  background-color: #1a946d;
 }
 .shelf-want-to-read {
-  background-color: #e00736;
+  background-color: #c90651;
 }
 .shelf-read {
-  background-color: #3508fc;
+  background-color: #0f6fc4;
 }
 .shelf-none {
   background-color: #999;

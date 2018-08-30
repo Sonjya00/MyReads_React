@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+
 import Book from "./Book";
 
 class MyBooks extends Component {
+  // Clear the shelf by removing all books currently stored in it.
   clearShelf = shelf =>
     shelf.map(book => this.props.updateRemoteShelves(book, "none"));
+
   render() {
     const {
       currentlyReading,
@@ -16,11 +19,13 @@ class MyBooks extends Component {
       handleData
     } = this.props;
 
+    // component shown while the data is being loaded on the shelves
     const LoadingMessage = (
       <div className="query-result--g">
         <p>Loading books on this shelf... </p>
       </div>
     );
+    // component shown if there is no book in one shelf
     const NoBooksMessages = (
       <p className="no-books-message">
         There are no books on this shelf. Add some from the{" "}
@@ -29,6 +34,7 @@ class MyBooks extends Component {
         </Link>
       </p>
     );
+
     return (
       <div className="list-books">
         <div className="list-books__top-bar">
@@ -43,6 +49,7 @@ class MyBooks extends Component {
               <h2 className="bookshelf__title heading--secondary">
                 Currently Reading ({currentlyReading.length})
               </h2>
+              {/* 3 possibilities: 1) loading screen; 2) no books; 3) show all books in the shelf */}
               {loadingShelves === true ? (
                 LoadingMessage
               ) : currentlyReading.length === 0 ? (

@@ -5,6 +5,7 @@ import MyBooks from "./MyBooks";
 import SearchBooks from "./SearchBooks";
 import BookDetails from "./BookDetails";
 import * as BooksAPI from "./BooksAPI";
+
 import "./App.css";
 
 class BooksApp extends Component {
@@ -15,7 +16,7 @@ class BooksApp extends Component {
     loadingShelves: true
   };
 
-  // Get initial state (book array and 3 shelves arrays)
+  // Get initial state (3 arrays, one for each shelf)
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.updateStateShelf(books);

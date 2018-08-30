@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 import * as BooksAPI from "./BooksAPI";
 
@@ -50,6 +51,9 @@ class BookDetails extends Component {
     } = this.state.book;
     const { shelf } = this.state;
     const { handleData } = this.props;
+    // component to render all the book details displayed.
+    // it calls handleData, which then may call handleArrayy, to properly
+    //display any type of data, if the data is available.
     const bookInfoLi = (info, title) => {
       if (info) {
         return (
@@ -78,7 +82,7 @@ class BookDetails extends Component {
             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
           </svg>
         </Link>
-
+        {/* 2 possible screens: 1. loading; 2. showing book details */}
         {this.state.loading === true ? (
           <div className="book-details__main">
             <div className="book-details__title">
@@ -161,7 +165,6 @@ class BookDetails extends Component {
                   <h3 className="book-details__info--title heading--tertiary">
                     Details about this book
                   </h3>
-                  {/* original position for the shelf tag */}
                   <ul className="book-details__info--list">
                     <li>
                       <span className="book-details--strong rating">

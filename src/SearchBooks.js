@@ -237,7 +237,11 @@ class SearchBooks extends Component {
               className="search-books__keywords-screen"
               onClick={this.selectKeyword}
             >
-              <h2 className="heading--secondary">Suggested Keywords</h2>
+              <h2 className="heading--secondary">Search New Books</h2>
+              <p>
+                To search for a new book, start typing in the search bar, or
+                click on one of the following keywords.
+              </p>
               <h3 className="heading--tertiary">Authors</h3>
               {keywordSection(keywords.authors)}
               <h3 className="heading--tertiary">Genre</h3>

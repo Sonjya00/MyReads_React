@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 import * as BooksAPI from "./BooksAPI";
 
@@ -9,6 +10,7 @@ class Book extends Component {
   };
 
   // Fetch the get API to include the info about the current shelf
+  // Needed to display the correct shelf value on the selector immediately.
   componentDidMount() {
     BooksAPI.get(this.props.id).then(data => {
       this.setState({
@@ -17,8 +19,8 @@ class Book extends Component {
     });
   }
 
-  // When the book changes shelf,
-  // call onUpdateRemoteShelves on either MyBooks or SearchBooks and send the new data
+  // When the book changes shelf, call onUpdateRemoteShelves on either
+  // MyBooks or SearchBooks and send the new data
   handleChangeShelf = event => {
     this.setState({
       shelf: event.target.value
@@ -38,6 +40,7 @@ class Book extends Component {
   render() {
     const { authors, id, img, title, handleData } = this.props;
     const { shelf } = this.state;
+    // const used to get the right path to the BookDetails page
     const path = `/details/${id}`;
     return (
       <li className="book">
