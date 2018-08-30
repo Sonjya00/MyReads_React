@@ -6,7 +6,7 @@ import * as BooksAPI from "./BooksAPI";
 
 class Book extends Component {
   state = {
-    shelf: this.props.shelf
+    shelf: ""
   };
 
   // Fetch the get API to include the info about the current shelf
