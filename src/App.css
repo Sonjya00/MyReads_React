@@ -131,6 +131,7 @@ body,
 /* search page */
 
 .search-books__bar {
+  background-color: white;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
   display: flex;
   left: 0;
