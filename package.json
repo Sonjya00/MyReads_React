@@ -1,4 +1,8 @@
 {
+  "name": "myreads-react",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://sonjya00.github.io/MyReads_React",
   "dependencies": {
     "install": "^0.12.1",
     "npm": "^6.4.0",
@@ -8,12 +12,15 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
+    "gh-pages": "^2.0.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
